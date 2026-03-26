@@ -253,3 +253,44 @@ To add a page to the nav, add a line here. To rename a menu item, change the lab
 | Step page | `verb-noun.md` | `add-robot.md`, `configure-agent.md` |
 | Image file | lowercase, hyphenated | `agent-builder-prompt-panel.png` |
 | Shared image | lives in `docs/assets/images/` | `../assets/images/maestro-overview.png` |
+
+
+
+
+
+There's no perfect WYSIWYG editor for MkDocs specifically, because MkDocs uses custom syntax (admonitions, image attributes) that no generic editor understands. But here's the practical breakdown:                    
+  ---                                                       
+  For live preview while editing 
+                                                                                                                                      
+  VS Code (what you already have) + split pane
+                                                                                                                                    
+  You're already using VS Code. Press Cmd+Shift+P → "Markdown: Open Preview to the Side" — you get the .md file on the left and a rendered preview on the right as you type.                                                                                                                                                        
+                                                                                                                           
+  Even better: keep mkdocs serve running in Terminal, open http://127.0.0.1:8000 in your browser — the actual styled site updates every time you save a file.      
+  That's your real preview with the correct theme, images, and formatting.
+                                                                                                                                                                   
+  ---                                                                                                                                                              
+  For the painful parts — just ask Claude Code
+                                                                                                                                                                   
+  The things that are genuinely painful to write manually:  
+                                                                                                                                                                   
+  - Two-column image layouts → "Add a 70/30 image split after step 3 on page X, left image is robot.png, right is output.png"                                      
+  - Admonition boxes → "Add a tip box after step 5 saying..."                                                                                                      
+  - Resizing images → "Resize all images on the configure-agent page to width 700"                                                                                 
+  - Reorganizing a page → "Move the Context Grounding section before the Prompts section"                                                                          
+                                                                                                                                                                   
+  You write the content in Typora or directly in VS Code, Claude handles the formatting markup.                                                                    
+                                                                                                                                                                   
+  ---                                                                                                                                                              
+  The practical workflow                                    
+                        
+  Write/edit text   →  Typora or VS Code
+  Preview           →  browser at localhost:8000 (mkdocs serve running)                                                                                            
+  Formatting/CSS    →  ask Claude Code                                                                                                                             
+  Publish           →  git push (automatic)                                                                                                                        
+                                                                                                                                                                   
+  The only command you ever need to remember:               
+                                                                                                                                                                   
+  /Users/sergey/Library/Python/3.9/bin/mkdocs serve         
+                                                                                                                                                                   
+  Run it once in Terminal, leave it open, and your browser becomes a live preview of the site as you edit.

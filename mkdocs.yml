@@ -1,4 +1,4 @@
-site_name: UiPath Agentic Practice Workshop
+site_name: UiPath Agentic Practice Workshop - Learner's Handbook
 site_url: https://s-shumilov.github.io/AgenticPracticeCourse/
 site_description: Hands-on learner's handbook for the UiPath Agentic Practice Workshop
 site_author: Sergey Shumilov
@@ -53,13 +53,6 @@ nav:
     - Overview: categorizing-incidents/index.md
     - LLM with Context: categorizing-incidents/llm-with-context.md
     - Tools and Escalations: categorizing-incidents/tools-and-escalations.md
-  - Invoice Matching:
-    - Overview: invoice-matching/index.md
-    - 1. Create BPMN Diagram: invoice-matching/create-bpmn.md
-    - 2. Add a Robot: invoice-matching/add-robot.md
-    - 3. Add an Agent: invoice-matching/add-agent.md
-    - 4. Add a Human: invoice-matching/add-human.md
-    - 5. Add API Calls: invoice-matching/add-api.md
   - Invoice Matching with IXP:
     - Overview: invoice-matching-ixp/index.md
     - 1. Create BPMN Process: invoice-matching-ixp/create-bpmn.md

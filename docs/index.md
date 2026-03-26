@@ -38,14 +38,7 @@ Build an intelligent ServiceNow incident triage agent, progressing through five 
 
 ---
 
-### 2. Invoice Matching Automation
-Build a multi-component process combining AI agents, robots, human validation, and API integrations using **Maestro** orchestration.
-
-[Start Exercise →](invoice-matching/index.md)
-
----
-
-### 3. Invoice Matching with IXP
+### 2. Invoice Matching with IXP
 Extend the invoice matching workflow with **Intelligent eXtraction & Processing** for automated data extraction from PDF invoices with confidence-based escalation.
 
 [Start Exercise →](invoice-matching-ixp/index.md)
