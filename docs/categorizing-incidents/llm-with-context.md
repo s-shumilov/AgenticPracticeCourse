@@ -122,4 +122,3 @@ The agent uses two prompts: a **System Prompt** that defines its role and rules,
 
     ![Evaluation results showing pass/fail per test case](images/llm-11.png){ .screenshot }
 
-[← Back to Overview](index.md) | [Next: Tools and Escalations →](tools-and-escalations.md)

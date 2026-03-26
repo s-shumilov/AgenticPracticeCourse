@@ -59,6 +59,3 @@ extra_css:
 
 extra:
   generator: false
-  social:
-    - icon: fontawesome/solid/rocket
-      link: https://github.com/s-shumilov/AgenticPracticeCourse

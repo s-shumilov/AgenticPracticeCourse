@@ -117,4 +117,3 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
 
 Your agent is now complete. It retrieves incident details from ServiceNow, categorizes them using grounded context, updates the ticket, and escalates when it cannot determine a clear category.
 
-[← Back to Overview](index.md)
