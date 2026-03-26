@@ -1,3 +1,31 @@
+/* White header bar — logo + site title area only; tabs remain orange */
+.md-header {
+  background-color: #ffffff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.md-header__title,
+.md-header__topic,
+.md-ellipsis {
+  color: #1a1a1a;
+}
+
+.md-header__button,
+.md-header__button.md-logo {
+  color: #444444;
+}
+
+.md-header__button:hover {
+  color: #000000;
+  opacity: 1;
+}
+
+/* Scale the logo to a comfortable height in the header */
+.md-header__button.md-logo img {
+  height: 2rem;
+  width: auto;
+}
+
 /* Image utilities */
 
 /* Center an image: ![alt](img.png){ .center } */
