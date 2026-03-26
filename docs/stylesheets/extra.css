@@ -24,3 +24,30 @@ img + em {
   margin-top: -0.75rem;
   margin-bottom: 1.5rem;
 }
+
+/* Two-column image grid
+   Usage: wrap two <div markdown> blocks inside one of these containers.
+   .img-cols-50    → 50 / 50
+   .img-cols-30-70 → 30 / 70
+   .img-cols-70-30 → 70 / 30                                        */
+.img-cols {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+.img-cols > div {
+  min-width: 0;
+}
+
+.img-cols > div img {
+  width: 100%;
+  margin: 0 auto 0.5rem !important;
+}
+
+.img-cols-50 > div       { flex: 1; }
+.img-cols-30-70 > div:first-child { flex: 3; }
+.img-cols-30-70 > div:last-child  { flex: 7; }
+.img-cols-70-30 > div:first-child { flex: 7; }
+.img-cols-70-30 > div:last-child  { flex: 3; }
