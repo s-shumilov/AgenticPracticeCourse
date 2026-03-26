@@ -121,19 +121,19 @@ img + em {
 /* Admonition — intensified backgrounds per type */
 
 /* note (blue) */
-.md-typeset .admonition.note  { background-color: rgba(68, 138, 255, 0.08); }
+.md-typeset .admonition.note  { background-color: rgba(68, 138, 255, 0.08) !important; }
 .md-typeset .note > .admonition-title { background-color: rgba(68, 138, 255, 0.25) !important; }
 
 /* info (cyan) */
-.md-typeset .admonition.info  { background-color: rgba(0, 176, 255, 0.08); }
+.md-typeset .admonition.info  { background-color: rgba(0, 176, 255, 0.08) !important; }
 .md-typeset .info > .admonition-title { background-color: rgba(0, 176, 255, 0.25) !important; }
 
 /* tip / hint (teal) */
-.md-typeset .admonition.tip   { background-color: rgba(0, 191, 165, 0.08); }
+.md-typeset .admonition.tip   { background-color: rgba(0, 191, 165, 0.08) !important; }
 .md-typeset .tip > .admonition-title  { background-color: rgba(0, 191, 165, 0.25) !important; }
 
 /* warning (amber) */
-.md-typeset .admonition.warning { background-color: rgba(255, 145, 0, 0.08); }
+.md-typeset .admonition.warning { background-color: rgba(255, 145, 0, 0.08) !important; }
 .md-typeset .warning > .admonition-title { background-color: rgba(255, 145, 0, 0.25) !important; }
 
 .img-cols-50 > div       { flex: 1; }
