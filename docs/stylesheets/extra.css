@@ -31,8 +31,8 @@
 
   /* White background for the drawer header area (was orange) */
   .md-nav--primary > .md-nav__title {
-    background-color: #ffffff;
-    color: #1a1a1a;
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     /* Allow the site title to wrap instead of truncating */
     white-space: normal;
@@ -42,9 +42,14 @@
     padding-bottom: 1rem;
   }
 
+  /* Cover any parent container that bleeds orange behind the title */
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    background-color: #ffffff;
+  }
+
   /* Back-arrow / logo button colour inside the drawer title */
   .md-nav--primary > .md-nav__title .md-nav__button {
-    color: #1a1a1a;
+    color: #1a1a1a !important;
   }
 
   /* Logo size inside the drawer */
