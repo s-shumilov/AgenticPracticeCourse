@@ -15,6 +15,7 @@ theme:
     - navigation.sections
     - navigation.top
     - navigation.footer
+    - toc.integrate
     - search.highlight
     - search.suggest
     - content.code.copy
