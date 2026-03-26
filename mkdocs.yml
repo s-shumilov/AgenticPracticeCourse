@@ -7,18 +7,9 @@ theme:
   name: material
   logo: assets/images/Partner Success Logo.png
   palette:
-    - scheme: default
-      primary: deep orange
-      accent: orange
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: deep orange
-      accent: orange
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+    scheme: default
+    primary: deep orange
+    accent: orange
   features:
     - navigation.tabs
     - navigation.sections
