@@ -22,9 +22,14 @@ A GitHub Pages–hosted MkDocs site that guides learners through hands-on UiPath
 ```
 docs/
   index.md                         ← Home page
+  assets/
+    images/                        ← Shared images used across multiple pages
+  stylesheets/
+    extra.css                      ← Custom image styles (do not modify)
   <exercise-slug>/
     index.md                       ← Exercise overview (always present)
     <step-slug>.md                 ← One file per step/sub-topic
+    images/                        ← Screenshots for this exercise's pages
   next-steps.md                    ← Standalone page
 ```
 
@@ -134,6 +139,65 @@ Rules:
 - Bullet lists: non-sequential items, feature lists, "you'll learn" sections.
 - Max two levels of nesting. If you need a third level, restructure as a new section.
 
+### Images
+
+**Where images live:**
+- Screenshots specific to one exercise → `docs/<exercise-slug>/images/`
+- Images shared across multiple pages → `docs/assets/images/`
+
+**File naming:** lowercase, hyphenated, descriptive of what is shown:
+`agent-builder-system-prompt.png`, `bpmn-overview-diagram.png`, `action-center-task.png`
+
+**Supported formats:** PNG for screenshots (preferred), JPG for photos, SVG for diagrams.
+
+**Referencing images in Markdown — three patterns:**
+
+1. Plain image (no styling):
+```markdown
+![Alt text describing what the screenshot shows](images/filename.png)
+```
+
+2. Screenshot with border and shadow (use for all UI screenshots):
+```markdown
+![Alt text](images/filename.png){ .screenshot }
+```
+
+3. Screenshot with a visible caption:
+```markdown
+![Alt text](images/filename.png){ .screenshot }
+*Caption text shown below the image*
+```
+
+Always use `.screenshot` for UiPath UI screenshots — it adds a subtle border and shadow that visually separates the screenshot from the page background.
+
+**Sizing** — only add `width` when the image would otherwise render too large (full-page screenshots):
+```markdown
+![Alt text](images/filename.png){ .screenshot width="700" }
+```
+
+**Alt text rules:**
+- Describe what is shown, not what to do: "Agent Builder system prompt configuration panel" not "Click here".
+- Never leave alt text empty for informational screenshots.
+- Decorative dividers or icons may use empty alt: `![](images/divider.svg)`.
+
+**From a shared folder** (when the same image is used on multiple pages):
+```markdown
+![Alt text](../assets/images/filename.png){ .screenshot }
+```
+
+**Position in page:** Images appear inside the `## Steps` numbered list, directly after the step text they illustrate. One image per step is the default; use two only if a before/after comparison is genuinely needed.
+
+Example step with image:
+```markdown
+1. Open **Agent Builder** and select **New Agent**.
+
+    ![New Agent button in Agent Builder](images/new-agent-button.png){ .screenshot }
+
+2. Enter a name for your agent and click **Create**.
+```
+
+Note the 4-space indent — this keeps the image inside the numbered list item so the list numbering doesn't reset.
+
 ### Links
 - Internal links: relative paths (`../invoice-matching/index.md`).
 - External URLs: always use Markdown link syntax, never bare URLs. Display text should be the domain or a descriptive label, not the raw URL.
@@ -191,12 +255,13 @@ Standard text — use exactly this in exercise overview pages:
 ## When Adding a New Exercise
 
 1. Create `docs/<exercise-slug>/` folder.
-2. Create `index.md` following the exercise overview structure above.
-3. Create one `.md` file per step following the step page structure above.
-4. Add all new pages to `nav:` in `mkdocs.yml` in the correct position.
-5. Add a summary card for the exercise to `docs/index.md` under `## Exercises`.
-6. Ensure every step page has a navigation footer linking to the previous and next pages.
-7. Run `mkdocs build` locally to verify no broken links or build errors before committing.
+2. Create `docs/<exercise-slug>/images/` folder (add `.gitkeep` so git tracks it).
+3. Create `index.md` following the exercise overview structure above.
+4. Create one `.md` file per step following the step page structure above.
+5. Add all new pages to `nav:` in `mkdocs.yml` in the correct position.
+6. Add a summary card for the exercise to `docs/index.md` under `## Exercises`.
+7. Ensure every step page has a navigation footer linking to the previous and next pages.
+8. Run `mkdocs build` locally to verify no broken links or build errors before committing.
 
 ## When Editing an Existing Page
 
