@@ -31,18 +31,18 @@ Credentials and permissions are managed by the platform administrators. You don'
 
 2. Set the action type to **Execute Connector Activity**.
 
-    ![Execute Connector Activity selected](images/ixp-api-01.png){ .screenshot }
+    ![Execute Connector Activity selected](configure-api.images/1-connector-activity.png){ .screenshot }
 
 3. Select the **Gmail Connector** and configure the shared Gmail connection.
 
-    ![Gmail Connector and shared connection selected](images/ixp-api-02.png){ .screenshot }
+    ![Gmail Connector and shared connection selected](configure-api.images/2-gmail-connector.png){ .screenshot }
 
 4. Configure the **Send Email** activity:
    - **To:** send it to yourself or a colleague.
    - **Subject:** generate a suitable subject.
    - **Body:** use `out_SuggestedResponse` — the HTML rejection email drafted by the agent and reviewed during human validation.
 
-    ![Email configured with body from out_SuggestedResponse](images/ixp-api-03.png){ .screenshot }
+    ![Email configured with body from out_SuggestedResponse](configure-api.images/3-email-configured.png){ .screenshot }
 
 5. Save the task.
 
@@ -52,11 +52,11 @@ Credentials and permissions are managed by the platform administrators. You don'
 
 7. Set the action type to **Execute Connector Activity**.
 
-    ![Execute Connector Activity on Approve path](images/ixp-api-04.png){ .screenshot }
+    ![Execute Connector Activity on Approve path](configure-api.images/4-approve-connector.png){ .screenshot }
 
 8. Select the **Data Fabric connector** and configure it to write the approved invoice record. The payments team's automation reads from Data Fabric to process payments.
 
-    ![Data Fabric connector configured](images/ixp-api-05.png){ .screenshot }
+    ![Data Fabric connector configured](configure-api.images/5-data-fabric-connector.png){ .screenshot }
 
 ### Part 3: Test the complete process
 
@@ -64,7 +64,7 @@ Credentials and permissions are managed by the platform administrators. You don'
    - Check **Data Fabric** — approved invoices accumulate as records.
    - Check the inbox — HTML-formatted rejection emails arrive for rejected invoices.
 
-    ![Data Fabric records from multiple process runs](images/ixp-api-06.png){ .screenshot }
+    ![Data Fabric records from multiple process runs](configure-api.images/6-data-fabric-records.png){ .screenshot }
 
 The process is complete. It retrieves invoice PDFs, extracts and validates data using IXP, routes exceptions to human review, sends rejection emails, and stores approved records — all orchestrated by Maestro.
 

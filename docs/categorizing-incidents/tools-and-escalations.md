@@ -24,11 +24,11 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
 
 2. Add the **Search Incidents by Incident Number** tool from the ServiceNow catalog.
 
-    ![ServiceNow tool catalog with Search Incidents tool selected](images/tools-01.png){ .screenshot }
+    ![ServiceNow tool catalog with Search Incidents tool selected](tools-and-escalations.images/1-search-incidents-tool.png){ .screenshot }
 
 3. Select the shared ServiceNow connection from the **ServiceNow Incidents** folder.
 
-    ![Shared ServiceNow connection selected](images/tools-02.png){ .screenshot }
+    ![Shared ServiceNow connection selected](tools-and-escalations.images/2-servicenow-connection.png){ .screenshot }
 
 4. Add the **UpdateServiceNowIncident** tool. Configure its argument descriptions exactly as follows:
 
@@ -42,7 +42,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
     !!! tip
         A ServiceNow incident has two identifiers: **ID** (a unique string like `36155...53afb2`) and **Number** (a human-readable label like `INC0111888`). The update tool requires the ID, not the Number.
 
-    ![UpdateServiceNowIncident tool configured with argument descriptions](images/tools-03.png){ .screenshot }
+    ![UpdateServiceNowIncident tool configured with argument descriptions](tools-and-escalations.images/3-update-tool-configured.png){ .screenshot }
 
 5. Update the agent's input arguments. Remove all existing input arguments and add a single one:
 
@@ -60,7 +60,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
     Determine the appropriate category, subcategory, and assignee email for this incident based on the provided information.
     ```
 
-    ![Updated User Prompt with IncidentNumber variable](images/tools-04.png){ .screenshot }
+    ![Updated User Prompt with IncidentNumber variable](tools-and-escalations.images/4-user-prompt-updated.png){ .screenshot }
 
 7. Update the **System Prompt** to instruct the agent how to use the tools:
 
@@ -70,7 +70,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
 
     Use the Search Incidents tool with `IncidentNumber` as input to retrieve incident details. Stop if an assignee already exists. After categorizing, determine the on-duty assignee using the Assignee Lookup automation. Update the ticket using the UpdateServiceNowIncident tool. Take no action if category, subcategory, or assignee cannot be established.
 
-    ![Updated System Prompt with tool instructions](images/tools-05.png){ .screenshot }
+    ![Updated System Prompt with tool instructions](tools-and-escalations.images/5-system-prompt-updated.png){ .screenshot }
 
 8. Test the updated agent using the **Ticket Management App** with a sample incident number. Categorized incidents move to the bottom list after processing.
 
@@ -78,7 +78,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
 
 9. Add an escalation path using the **ServiceNow Agent Escalation App** from the **ServiceNow Incidents** folder.
 
-    ![Escalation app selected from ServiceNow Incidents folder](images/tools-06.png){ .screenshot }
+    ![Escalation app selected from ServiceNow Incidents folder](tools-and-escalations.images/6-escalation-app.png){ .screenshot }
 
 10. Configure the escalation tool with this prompt:
 
@@ -96,7 +96,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
     - **Submit** → Continue execution
     - **Stop** → End execution
 
-    ![Escalation tool configuration with prompt and arguments](images/tools-07.png){ .screenshot }
+    ![Escalation tool configuration with prompt and arguments](tools-and-escalations.images/7-escalation-config.png){ .screenshot }
 
 12. Update the **System Prompt** to add the escalation handling instructions:
 
@@ -104,7 +104,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
     If Category and Subcategory have been selected by the user as part of escalation, look up Assignee based on selected Category and Subcategory, and then update ticket. Only use email addresses retrieved from the lookup tool, do not generate email addresses.
     ```
 
-    ![System Prompt updated with escalation instructions](images/tools-08.png){ .screenshot }
+    ![System Prompt updated with escalation instructions](tools-and-escalations.images/8-system-prompt-escalation.png){ .screenshot }
 
 13. Test the escalation path with this sample incident:
 
@@ -113,7 +113,7 @@ Escalation is not a failure — it is a design choice. Use it whenever the agent
 
     The agent should recognize it cannot categorize this incident and trigger the escalation, creating a task in **Action Center** for a human reviewer.
 
-    ![Action Center task created for the escalated incident](images/tools-09.png){ .screenshot }
+    ![Action Center task created for the escalated incident](tools-and-escalations.images/9-action-center-escalation.png){ .screenshot }
 
 Your agent is now complete. It retrieves incident details from ServiceNow, categorizes them using grounded context, updates the ticket, and escalates when it cannot determine a clear category.
 

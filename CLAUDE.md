@@ -71,20 +71,10 @@ Exercise overview pages use label: `Overview`.
 
 ### Step page (`<exercise>/<step>.md`)
 1. `# Step N — Verb Noun` (or a descriptive title if not sequential)
-2. `**Bold subtitle**` — one line describing the goal of this step
-3. `---`
-4. `## Goal` — what the learner will have built by the end
-5. Conceptual sections (one `##` per key concept or sub-task)
-6. `## Steps` — numbered step-by-step instructions; use a placeholder comment if not yet written
-7. Navigation footer (see below) — always the last line
-
-### Navigation footer (every step page)
-Format exactly as follows — no trailing newline after:
-```
-[← Step N-1: Previous Title](prev.md) | [Next: Step N+1 Title →](next.md)
-```
-- First step of an exercise: `[← Back to Overview](index.md) | [Next: Title →](next.md)`
-- Last step of an exercise: `[← Step N-1: Title](prev.md) | [Back to Overview](index.md)`
+2. `!!! tip "Let's start"` admonition — numbered list of 2–3 actions for this step (what the learner will do)
+3. `## Goal` — one short paragraph: what the learner will have built by the end
+4. Conceptual sections (one `##` per key concept or sub-task)
+5. `## Steps` (or a descriptive heading) — numbered step-by-step instructions; use a placeholder comment if not yet written
 
 ---
 
@@ -260,8 +250,7 @@ Standard text — use exactly this in exercise overview pages:
 4. Create one `.md` file per step following the step page structure above.
 5. Add all new pages to `nav:` in `mkdocs.yml` in the correct position.
 6. Add a summary card for the exercise to `docs/index.md` under `## Exercises`.
-7. Ensure every step page has a navigation footer linking to the previous and next pages.
-8. Run `mkdocs build` locally to verify no broken links or build errors before committing.
+7. Run `mkdocs build` locally to verify no broken links or build errors before committing.
 
 ## When Editing an Existing Page
 

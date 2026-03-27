@@ -32,14 +32,14 @@ Here's what the validation form needs:
 
 1. Import the **2WM Validation App IXP Template** from the shared templates into your solution. Find it and click **Add**.
 
-    ![2WM Validation App IXP Template selected](images/ixp-human-01.png){ .screenshot }
+    ![2WM Validation App IXP Template selected](configure-human-validation.images/1-validation-app-template.png){ .screenshot }
 
 2. After the app appears in your solution, review its structure:
    - UI elements — how the validation task appears to the reviewer.
    - App Actions and Action Schema — the possible outcomes of the reviewer's decision.
    - App Inputs and Outputs — where data comes from and what comes out.
 
-    ![2WM Validation App IXP interface](images/ixp-human-02.png){ .screenshot }
+    ![2WM Validation App IXP interface](configure-human-validation.images/2-validation-app-interface.png){ .screenshot }
 
 ### Part 2: Configure the human task in Maestro
 
@@ -47,7 +47,7 @@ Here's what the validation form needs:
 
 4. Set the action type to **Action App Task**.
 
-    ![Action App Task selected](images/ixp-human-03.png){ .screenshot }
+    ![Action App Task selected](configure-human-validation.images/3-action-app-task.png){ .screenshot }
 
 5. Select the **2WM Validation App IXP** you imported.
 
@@ -55,7 +55,7 @@ Here's what the validation form needs:
 
 7. In **Advanced Options**, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.
 
-    ![Task configured with title and assignee](images/ixp-human-04.png){ .screenshot }
+    ![Task configured with title and assignee](configure-human-validation.images/4-task-configured.png){ .screenshot }
 
 8. Map the agent outputs to the app inputs:
 
@@ -64,17 +64,17 @@ Here's what the validation form needs:
     | `out_DocumentsHTML` | Comparison display field |
     | `out_SuggestedResponse` | Suggested rejection email field |
 
-    ![Agent outputs mapped to app inputs](images/ixp-human-05.png){ .screenshot }
+    ![Agent outputs mapped to app inputs](configure-human-validation.images/5-input-mapping.png){ .screenshot }
 
 9. Save the task configuration.
 
-    ![Completed task configuration](images/ixp-human-06.png){ .screenshot }
+    ![Completed task configuration](configure-human-validation.images/6-task-config-complete.png){ .screenshot }
 
 ### Part 3: Configure the gateway decision
 
 10. Configure the **Exclusive Gateway** downstream from the human task.
 
-    ![Exclusive Gateway configured](images/ixp-human-07.png){ .screenshot }
+    ![Exclusive Gateway configured](configure-human-validation.images/7-exclusive-gateway.png){ .screenshot }
 
 11. Set **Reject** as the default path.
 
@@ -84,34 +84,34 @@ Here's what the validation form needs:
     vars.actionOutput == "Approve"
     ```
 
-    ![Expression Editor with Approve condition](images/ixp-human-08.png){ .screenshot }
+    ![Expression Editor with Approve condition](configure-human-validation.images/8-approve-condition.png){ .screenshot }
 
 ### Part 4: Test the human validation flow
 
 13. Click **Debug**. With `in_FailureProbability` set to 90, the invoice will frequently fail to match, triggering the human task.
 
-    ![Process debug with human task triggered](images/ixp-human-09.png){ .screenshot }
+    ![Process debug with human task triggered](configure-human-validation.images/9-debug-human-task.png){ .screenshot }
 
 14. When the process pauses, click **Open app task** or find it in **Action Center**. Review the comparison and click **Approve** or **Reject**.
 
-    ![Action Center showing invoice review task](images/ixp-human-10.png){ .screenshot }
+    ![Action Center showing invoice review task](configure-human-validation.images/10-action-center-task.png){ .screenshot }
 
 15. Confirm the process resumed and routed correctly after your decision.
 
-    ![Process resumed after human decision](images/ixp-human-11.png){ .screenshot }
+    ![Process resumed after human decision](configure-human-validation.images/11-process-resumed.png){ .screenshot }
 
 16. Review the execution trace in Maestro to verify the correct path was taken.
 
-    ![Execution trace showing the path taken](images/ixp-human-12.png){ .screenshot }
+    ![Execution trace showing the path taken](configure-human-validation.images/12-execution-trace.png){ .screenshot }
 
 17. Run a few more tests — try both Approve and Reject — to confirm both paths work.
 
-    ![Second test run with different decision outcome](images/ixp-human-13.png){ .screenshot }
+    ![Second test run with different decision outcome](configure-human-validation.images/13-second-test-run.png){ .screenshot }
 
-    ![Process execution summary after multiple test runs](images/ixp-human-14.png){ .screenshot }
+    ![Process execution summary after multiple test runs](configure-human-validation.images/14-execution-summary.png){ .screenshot }
 
 18. Review the end-to-end process execution.
 
-    ![End-to-end process flow](images/ixp-human-15.gif){ .screenshot }
+    ![End-to-end process flow](configure-human-validation.images/15-end-to-end-flow.gif){ .screenshot }
 
 [← Step 3: Configure an Agent](configure-agent.md) | [Next: Configure API Integration →](configure-api.md)

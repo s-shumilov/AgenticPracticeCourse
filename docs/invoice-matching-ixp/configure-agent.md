@@ -1,8 +1,17 @@
-# Step 3 — Configure an Agent
+# Automating cognitive tasks using Agents
 
 ---
 
 ***Build the 2-Way Matching Agent and connect it to your Maestro workflow***
+
+Key steps in this lesson:
+Build the 2-Way Matching AI Agent from scratch in Studio Web.
+Agent will use Robot's JSONs as inputs, and output the validation result.
+If there is a problem with invoice, agent will also prepare data for human validation task. 
+Configure testing and build evaluations dataset to ensure quality of the Agent (optional).
+Configure the Agent in Maestro workflow 
+Configure Maestro Gateway based on Agent's outputs.
+Simulate to see if decision goes the right direction.
 
 ---
 
@@ -22,7 +31,7 @@ When discrepancies are found, you also need to draft a response to the supplier 
 
 1. In **Studio Web**, add a new Agent to your solution. Name it **2-Way Matching Agent**.
 
-    ![New agent created in Studio Web](images/ixp-agent-01.png){ .screenshot }
+    ![New agent created in Studio Web](configure-agent.images/1-new-agent.png){ .screenshot }
 
     When prompted, dismiss the Autopilot screen and click **Start fresh**. You can explore Autopilot later, but here you'll configure prompts and settings manually.
 
@@ -34,11 +43,11 @@ When discrepancies are found, you also need to draft a response to the supplier 
     | Type | File |
     | Description | Invoice File |
 
-    ![Input argument InvoicePDF configured as File type](images/ixp-agent-02.png){ .screenshot }
+    ![Input argument InvoicePDF configured as File type](configure-agent.images/2-input-argument.png){ .screenshot }
 
 3. For Output arguments, switch to editor mode.
 
-    ![Switching to editor mode for output arguments](images/ixp-agent-03.png){ .screenshot }
+    ![Switching to editor mode for output arguments](configure-agent.images/3-editor-mode.png){ .screenshot }
 
 4. Paste the following JSON into the editor:
 
@@ -68,11 +77,11 @@ When discrepancies are found, you also need to draft a response to the supplier 
     }
     ```
 
-    ![Output arguments JSON pasted into editor](images/ixp-agent-04.png){ .screenshot }
+    ![Output arguments JSON pasted into editor](configure-agent.images/4-output-json.png){ .screenshot }
 
 5. Confirm all four output arguments are configured correctly.
 
-    ![Output arguments configured](images/ixp-agent-05.png){ .screenshot }
+    ![Output arguments configured](configure-agent.images/5-output-arguments.png){ .screenshot }
 
 ### Part 2: Configure the prompts
 
@@ -82,7 +91,7 @@ When discrepancies are found, you also need to draft a response to the supplier 
     Analyze {{InvoicePDF}}.
     ```
 
-    ![User Prompt with InvoicePDF variable](images/ixp-agent-06.png){ .screenshot }
+    ![User Prompt with InvoicePDF variable](configure-agent.images/6-user-prompt.png){ .screenshot }
 
 7. Enter the following **System Prompt**:
 
@@ -130,27 +139,27 @@ When discrepancies are found, you also need to draft a response to the supplier 
     Always double-check your analysis and outputs for accuracy before finalizing your response.
     ```
 
-    ![System Prompt configured](images/ixp-agent-07.png){ .screenshot }
+    ![System Prompt configured](configure-agent.images/7-system-prompt.png){ .screenshot }
 
 ### Part 3: Add the IXP tool
 
 8. In canvas mode, select your agent and add a new Tool.
 
-    ![Tools section, adding a new tool](images/ixp-agent-08.png){ .screenshot }
+    ![Tools section, adding a new tool](configure-agent.images/8-add-tool.png){ .screenshot }
 
 9. Select **IXP** from the toolbox and choose the **InvoicesIXP** project.
 
-    ![InvoicesIXP project selected](images/ixp-agent-09.png){ .screenshot }
+    ![InvoicesIXP project selected](configure-agent.images/9-ixp-project.png){ .screenshot }
 
     This is an out-of-the-box invoice extraction model with standard taxonomy. It returns a JSON object containing the extracted data.
 
 10. Add a meaningful description, for example: **Invoice Data extraction tool**.
 
-    ![IXP tool description configured](images/ixp-agent-10.png){ .screenshot }
+    ![IXP tool description configured](configure-agent.images/10-ixp-description.png){ .screenshot }
 
 11. Save the IXP tool configuration.
 
-    ![IXP tool saved and visible in the tools list](images/ixp-agent-11.png){ .screenshot }
+    ![IXP tool saved and visible in the tools list](configure-agent.images/11-ixp-tool-saved.png){ .screenshot }
 
 ### Part 4: Build and add the PO lookup tool
 
@@ -158,19 +167,19 @@ PO data is stored in Data Fabric. You'll build a small RPA workflow to query it,
 
 12. Add a new RPA workflow to your solution. Give it a meaningful name.
 
-    ![New RPA workflow added to solution](images/ixp-agent-12.png){ .screenshot }
+    ![New RPA workflow added to solution](configure-agent.images/12-new-rpa-workflow.png){ .screenshot }
 
 13. Configure the input and output variables for the workflow.
 
-    ![Input and output variables configured](images/ixp-agent-13.png){ .screenshot }
+    ![Input and output variables configured](configure-agent.images/13-workflow-variables.png){ .screenshot }
 
 14. Add a **Query Entity Records** activity configured to query the **PurchaseOrdersDatabase** entity. Apply the filter: **POID equals in_POID**. Return the PODATA field as the output.
 
-    ![Query Entity Records activity with POID filter](images/ixp-agent-14.png){ .screenshot }
+    ![Query Entity Records activity with POID filter](configure-agent.images/14-query-entity-records.png){ .screenshot }
 
 15. Back in your agent's canvas, add this RPA workflow as a tool.
 
-    ![RPA workflow added as a tool](images/ixp-agent-15.png){ .screenshot }
+    ![RPA workflow added as a tool](configure-agent.images/15-rpa-tool-added.png){ .screenshot }
 
 16. Configure the input hint for the **in_POID** argument so the agent knows the expected format:
 
@@ -178,27 +187,27 @@ PO data is stored in Data Fabric. You'll build a small RPA workflow to query it,
     Purchase Order ID. It starts with 'PO-' followed by a few digits, for example: 'PO-123456'.
     ```
 
-    ![Both tools saved and visible in tools list](images/ixp-agent-16.png){ .screenshot }
+    ![Both tools saved and visible in tools list](configure-agent.images/16-both-tools.png){ .screenshot }
 
 ### Part 5: Test the agent
 
 17. Test the agent with a sample PDF invoice. Confirm the agent calls the IXP tool first.
 
-    ![Agent test execution started with PDF input](images/ixp-agent-17.png){ .screenshot }
+    ![Agent test execution started with PDF input](configure-agent.images/17-agent-test.png){ .screenshot }
 
 18. Review the IXP extraction results and verify the agent identified the PO ID correctly.
 
-    ![IXP extraction results with PO ID identified](images/ixp-agent-18.png){ .screenshot }
+    ![IXP extraction results with PO ID identified](configure-agent.images/18-ixp-results.png){ .screenshot }
 
 19. Confirm the agent called the PO lookup tool with the extracted PO ID.
 
-    ![PO lookup tool called with extracted POID](images/ixp-agent-19.png){ .screenshot }
+    ![PO lookup tool called with extracted POID](configure-agent.images/19-po-lookup.png){ .screenshot }
 
 20. Review the final output. Verify `out_Status`, `out_DocumentsHTML`, `out_SuggestedResponse`, and `out_POID` are all populated.
 
-    ![Agent output variables fully populated](images/ixp-agent-20.png){ .screenshot }
+    ![Agent output variables fully populated](configure-agent.images/20-output-variables.png){ .screenshot }
 
-    ![HTML comparison output preview](images/ixp-agent-21.png){ .screenshot }
+    ![HTML comparison output preview](configure-agent.images/21-html-comparison.png){ .screenshot }
 
     Notice how the JSON formats of the invoice (returned by IXP) and the Purchase Order are different. The agent understands the meaning of both documents and correctly detects discrepancies regardless of format differences.
 
@@ -206,7 +215,7 @@ PO data is stored in Data Fabric. You'll build a small RPA workflow to query it,
 
 21. Return to your **Maestro Agentic Process** and configure the agent task. Set the action to **Start and wait for agent**, then select **2-Way Matching Agent**.
 
-    ![Agent task configured in Maestro](images/ixp-agent-22.png){ .screenshot }
+    ![Agent task configured in Maestro](configure-agent.images/22-agent-task-maestro.png){ .screenshot }
 
 22. Map the robot output to the agent input. Agent outputs are automatically added to the workflow variables.
 
@@ -214,7 +223,7 @@ PO data is stored in Data Fabric. You'll build a small RPA workflow to query it,
     |-------------|-------------|
     | `out_FileName` | `InvoicePDF` |
 
-    ![Input mapping from robot output to agent input](images/ixp-agent-23.png){ .screenshot }
+    ![Input mapping from robot output to agent input](configure-agent.images/23-input-mapping.png){ .screenshot }
 
 23. Configure the **Exclusive Gateway** after the agent task. Set the expression for the **Full Match** path:
 
@@ -226,7 +235,7 @@ PO data is stored in Data Fabric. You'll build a small RPA workflow to query it,
 
 24. Click **Debug** and confirm the gateway routes correctly based on the agent's output.
 
-    ![Process debug run showing correct gateway routing](images/ixp-agent-24.png){ .screenshot }
+    ![Process debug run showing correct gateway routing](configure-agent.images/24-gateway-routing.png){ .screenshot }
 
 Your agent is ready. In most cases, you'll need to return and refine the prompt to cover more edge cases — for example, allowing semantically similar descriptions, or splitting a single PO line item across multiple invoice lines.
 

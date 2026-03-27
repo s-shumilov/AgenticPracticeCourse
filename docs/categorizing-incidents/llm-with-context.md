@@ -22,13 +22,13 @@ Evaluations let you run a batch of test cases against your agent before deployin
 
 1. In **Studio Web**, create a new **Agent Solution**.
 
-    ![Agent Solution created in Studio Web](images/llm-01.png){ .screenshot }
+    ![Agent Solution created in Studio Web](llm-with-context.images/1-agent-solution.png){ .screenshot }
 
 2. Rename the solution to **ServiceNow Incidents Management Solution**.
 
 3. Name the agent **ServiceNow Incidents Management Agent**.
 
-    ![Agent named and solution renamed](images/llm-02.png){ .screenshot }
+    ![Agent named and solution renamed](llm-with-context.images/2-agent-named.png){ .screenshot }
 
 4. Open the **Data Manager** panel and add the following **Input Arguments** (type: String):
 
@@ -37,7 +37,7 @@ Evaluations let you run a batch of test cases against your agent before deployin
     | `IncidentShortDescription` | Short description of the ServiceNow incident |
     | `IncidentDescription` | Full description of the ServiceNow incident |
 
-    ![Input arguments configured in Data Manager](images/llm-03.png){ .screenshot }
+    ![Input arguments configured in Data Manager](llm-with-context.images/3-input-arguments.png){ .screenshot }
 
 5. Add the following **Output Arguments**:
 
@@ -48,7 +48,7 @@ Evaluations let you run a batch of test cases against your agent before deployin
     | `AssigneeEmail` | Email address of the assigned expert |
     | `ExecutionDetails` | Summary of the classification steps taken |
 
-    ![Output arguments configured in Data Manager](images/llm-04.png){ .screenshot }
+    ![Output arguments configured in Data Manager](llm-with-context.images/4-output-arguments.png){ .screenshot }
 
 ### Part 2: Configure the agent prompts
 
@@ -60,7 +60,7 @@ The agent uses two prompts: a **System Prompt** that defines its role and rules,
     You are a ServiceNow Incidents categorization agent. Analyze incident details and determine the correct Category, Subcategory, and Assignee email address.
     ```
 
-    ![System prompt configured](images/llm-05.png){ .screenshot }
+    ![System prompt configured](llm-with-context.images/5-system-prompt.png){ .screenshot }
 
 7. Enter the following text in the **User Prompt** field:
 
@@ -75,19 +75,19 @@ The agent uses two prompts: a **System Prompt** that defines its role and rules,
     - **Short Description:** `CRM software crashes on launch`
     - **Description:** `Every time I try to open the CRM software, it crashes immediately after the splash screen. This has been happening for the past week and is affecting my ability to manage customer interactions.`
 
-    ![Agent test execution with sample incident data](images/llm-06.png){ .screenshot }
+    ![Agent test execution with sample incident data](llm-with-context.images/6-agent-test.png){ .screenshot }
 
 ### Part 3: Add Context Grounding
 
 9. Enable **Context Grounding** in the agent configuration.
 
-    ![Context Grounding toggle enabled](images/llm-07.png){ .screenshot }
+    ![Context Grounding toggle enabled](llm-with-context.images/7-context-grounding.png){ .screenshot }
 
 10. Select **ServiceNow Incidents Categorization Information** as the context source.
 
     The context contains only valid Category–Subcategory pairs. The agent must select from this list — it must not generate combinations that are not present.
 
-    ![Context source selected](images/llm-08.png){ .screenshot }
+    ![Context source selected](llm-with-context.images/8-context-source.png){ .screenshot }
 
 11. Import the **SNOW Assignee Lookup Automation** project.
 
@@ -97,7 +97,7 @@ The agent uses two prompts: a **System Prompt** that defines its role and rules,
     Use this tool to determine the email address of the on-duty expert for a given incident category and subcategory.
     ```
 
-    ![Assignee Lookup tool added to the agent](images/llm-09.png){ .screenshot }
+    ![Assignee Lookup tool added to the agent](llm-with-context.images/9-assignee-tool.png){ .screenshot }
 
 ### Part 4: Test with Evaluations
 
@@ -116,9 +116,9 @@ The agent uses two prompts: a **System Prompt** that defines its role and rules,
     | 7 | VPN disconnection | Network_VPN |
     | 8 | Windows update failure | Software_OS |
 
-    ![Evaluation set imported](images/llm-10.png){ .screenshot }
+    ![Evaluation set imported](llm-with-context.images/10-evaluation-set.png){ .screenshot }
 
 15. Run the evaluation set and review the results.
 
-    ![Evaluation results showing pass/fail per test case](images/llm-11.png){ .screenshot }
+    ![Evaluation results showing pass/fail per test case](llm-with-context.images/11-evaluation-results.png){ .screenshot }
 
