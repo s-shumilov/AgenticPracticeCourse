@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#add-an-action-app-for-human-validation" class="md-skip">
+        <a href="#involving-humans-only-when-necessary" class="md-skip">
           Skip to content
         </a>
       
@@ -821,6 +821,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../you-did-it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    You did it!
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -872,7 +900,7 @@
 
 
 
-<h1 id="add-an-action-app-for-human-validation">Add an Action App for human validation<a class="headerlink" href="#add-an-action-app-for-human-validation" title="Permanent link">&para;</a></h1>
+<h1 id="involving-humans-only-when-necessary">Involving humans only when necessary<a class="headerlink" href="#involving-humans-only-when-necessary" title="Permanent link">&para;</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Here is our plan for this lesson:</p>
 <ol>
@@ -938,17 +966,21 @@
 <p>Set the action type to <strong>Action App Task</strong>.</p>
 <p><img alt="Action App Task selected" class="screenshot" src="../configure-human-validation.images/3-action-app-task.png" /></p>
 </li>
-<li>
+</ol>
+<div class="img-cols img-cols-30">
+<div>
 <p>Select the <strong>2WM Validation App IXP</strong> you imported.</p>
-</li>
-<li>
 <p>Customize the task title so it's easy to identify in Action Center later, for example: <strong>Invoice Review Required</strong>.</p>
-</li>
-<li>
-<p>In <strong>Advanced Options</strong>, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.</p>
-<p><img alt="Task configured with title and assignee" class="screenshot" src="../configure-human-validation.images/4-task-configured.png" /></p>
-</li>
-<li>
+<p>In <strong>Advanced Options</strong>, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.
+  </p>
+</div>
+<div>
+<p><img alt="Task configured with title and assignee" class="screenshot" src="../configure-human-validation.images/4-task-configured.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-50">
+<div>
 <p>The App should pick the Agent's outputs as App inputs — just the way we did with the agent. Here you might again see the true value of following naming conventions!</p>
 <table>
 <thead>
@@ -966,10 +998,19 @@
 <td><code>out_SuggestedResponse</code></td>
 <td>Suggested rejection email field</td>
 </tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p><img alt="Agent outputs mapped to app inputs" class="screenshot" src="../configure-human-validation.images/5-input-mapping.png" /></p>
-</li>
+</div>
+<div>
+<p><img alt="Agent outputs mapped to app inputs" class="screenshot" src="../configure-human-validation.images/5-input-mapping.png" />
+  </p>
+</div>
+</div>
+<ol>
 <li>
 <p>Save the task configuration.</p>
 <p><img alt="Completed task configuration" class="screenshot" src="../configure-human-validation.images/6-task-config-complete.png" /></p>
@@ -982,16 +1023,20 @@
 <p>Configure the <strong>Exclusive Gateway</strong> downstream from the human task.</p>
 <p><img alt="Exclusive Gateway configured" class="screenshot" src="../configure-human-validation.images/7-exclusive-gateway.png" /></p>
 </li>
-<li>
-<p>Set <strong>Reject</strong> as the default path (note that a real business process might have a different approach).</p>
-</li>
-<li>
-<p>In the Expression Editor, pick the <strong>Action</strong> output — which per the app settings can be <code>"Approve"</code> or <code>"Reject"</code>. Configure the <strong>Approve</strong> path condition:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vars.actionOutput == &quot;Approve&quot;
-</code></pre></div>
-<p><img alt="Expression Editor with Approve condition" class="screenshot" src="../configure-human-validation.images/8-approve-condition.png" /></p>
-</li>
 </ol>
+<div class="img-cols img-cols-30">
+<div>
+<p>Set <strong>Reject</strong> as the default path (note that a real business process might have a different approach).</p>
+<p>In the Expression Editor, pick the <strong>Action</strong> output — which per the app settings can be <code>"Approve"</code> or <code>"Reject"</code>. Configure the <strong>Approve</strong> path condition:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vars.actionOutput == &quot;Approve&quot;
+</code></pre></div>
+  </p>
+</div>
+<div>
+<p><img alt="Expression Editor with Approve condition" class="screenshot" src="../configure-human-validation.images/8-approve-condition.png" />
+  </p>
+</div>
+</div>
 <h3 id="part-4-test-the-human-validation-flow">Part 4: Test the human validation flow<a class="headerlink" href="#part-4-test-the-human-validation-flow" title="Permanent link">&para;</a></h3>
 <p>Testing time! Now click the Debug button and monitor the execution. In some cases (<code>in_FailureProbability</code>), the Invoice will not match the Purchase Order and will go for validation.</p>
 <ol>

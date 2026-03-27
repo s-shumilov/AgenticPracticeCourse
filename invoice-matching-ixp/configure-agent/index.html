@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#build-an-agent-and-add-it-to-workflow" class="md-skip">
+        <a href="#automating-cognitive-tasks-using-agents" class="md-skip">
           Skip to content
         </a>
       
@@ -685,10 +685,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-use-an-llm-for-matching" class="md-nav__link">
+  <a href="#why-use-the-llm-for-matching" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Use an LLM for Matching
+        Why Use the LLM for Matching
       
     </span>
   </a>
@@ -708,10 +708,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#part-1-create-the-agent-and-configure-arguments" class="md-nav__link">
+  <a href="#1-create-the-agent-and-configure-arguments" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 1: Create the agent and configure arguments
+        1. Create the agent and configure arguments
       
     </span>
   </a>
@@ -719,10 +719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-2-configure-the-prompts" class="md-nav__link">
+  <a href="#2-configure-the-prompts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 2: Configure the prompts
+        2. Configure the prompts
       
     </span>
   </a>
@@ -730,10 +730,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-3-add-the-ixp-tool" class="md-nav__link">
+  <a href="#3-add-the-ixp-and-po-retrieval-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 3: Add the IXP tool
+        3. Add the IXP and PO retrieval tools
       
     </span>
   </a>
@@ -741,10 +741,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-4-build-and-add-the-po-lookup-tool" class="md-nav__link">
+  <a href="#4-build-and-add-the-po-lookup-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 4: Build and add the PO lookup tool
+        4. Build and add the PO lookup tool
       
     </span>
   </a>
@@ -843,6 +843,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../you-did-it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    You did it!
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -894,14 +922,14 @@
 
 
 
-<h1 id="build-an-agent-and-add-it-to-workflow">Build an Agent and add it to workflow<a class="headerlink" href="#build-an-agent-and-add-it-to-workflow" title="Permanent link">&para;</a></h1>
+<h1 id="automating-cognitive-tasks-using-agents">Automating cognitive Tasks using Agents<a class="headerlink" href="#automating-cognitive-tasks-using-agents" title="Permanent link">&para;</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Here is our plan for this lesson:</p>
 <ol>
 <li>
-<p>Build the <strong>2-Way Matching AI Agent</strong> from scratch in <strong>Studio Web</strong>.</p>
+<p>Build the 2-Way Matching AI Agent from scratch.</p>
 <ul>
-<li>The agent will use Robot's JSON outputs as inputs, and output the validation result.</li>
+<li>The agent will use Robot's PDF outputs as its inputs, and return validation result.</li>
 <li>If there is a problem with the invoice, the agent will also prepare data for the human validation task.</li>
 </ul>
 </li>
@@ -912,7 +940,7 @@
 <p>Configure the Agent in the Maestro workflow.</p>
 </li>
 <li>
-<p>Configure Maestro Gateway based on Agent's outputs.</p>
+<p>Configure decision Gateway based on Agent's outputs.</p>
 </li>
 <li>
 <p>Simulate to see if the decision goes the right direction.</p>
@@ -920,23 +948,60 @@
 </ol>
 </div>
 <h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>Create the <strong>2-Way Matching Agent</strong> with two tools: an IXP data extraction tool and an RPA workflow tool that queries the Purchase Order database. The agent receives a PDF invoice, extracts structured data, looks up the corresponding PO, and returns a matching decision with supporting outputs.</p>
-<h2 id="why-use-an-llm-for-matching">Why Use an LLM for Matching<a class="headerlink" href="#why-use-an-llm-for-matching" title="Permanent link">&para;</a></h2>
-<p>The next step in our process is to compare Purchase Order and Invoice.</p>
+<p>Create the <strong>2-Way Matching Agent</strong> with two tools: </p>
+<ul>
+<li>
+<p>an IXP data extraction tool </p>
+</li>
+<li>
+<p>RPA workflow tool that queries the Purchase Order database. </p>
+</li>
+</ul>
+<p>The agent receives a PDF invoice, extracts structured data (including PO details), looks up the corresponding PO, and returns a matching decision with supporting outputs.</p>
+<h2 id="why-use-the-llm-for-matching">Why Use the LLM for Matching<a class="headerlink" href="#why-use-the-llm-for-matching" title="Permanent link">&para;</a></h2>
+<p>One of the steps in our process is to compare Purchase Order and Invoice.</p>
 <p>You can write traditional code that would compare and analyze invoice data and line items, but it might be fairly challenging, since "rules" are usually flexible — for example, tables might include lines with semantically similar but not identical descriptions, or there may be some other acceptable variations. This increases code complexity and implementation time for every such edge case.</p>
 <p>Also, if discrepancies are detected, the usual next step is to write to the sender and request to update the invoice.</p>
 <p>LLMs are ideal for this job — they can analyze large amounts of text in any format, identify discrepancies and exceptions, then follow the instructions in prompts to generate a validation summary or email response in the required format and language.</p>
-<p>Let's use Studio to create our "2-Way Matching Agent"!</p>
+<div class="img-cols img-cols-30">
+<div>
+<p>Here is the structure of the agent's inputs and outputs, as well as Tools that agent will require to perform the task:
+  </p>
+</div>
+<div>
+<p><img alt="SAgent's inputs and outputs" class="screenshot" src="../configure-agent.images/1-agent-structure.png" />
+  </p>
+</div>
+</div>
 <h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<h3 id="part-1-create-the-agent-and-configure-arguments">Part 1: Create the agent and configure arguments<a class="headerlink" href="#part-1-create-the-agent-and-configure-arguments" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>In <strong>Studio Web</strong>, add a new Agent to your solution. Remember that Solutions can have multiple components such as apps, automations, workflows and agents. Name it <strong>2-Way Matching Agent</strong>.</p>
-<p><img alt="New agent created in Studio Web" class="screenshot" src="../configure-agent.images/1-new-agent.png" /></p>
-<p>Dismiss the Autopilot screen when you see the prompt to generate a new agent. Feel free to play with Autopilot later, but here you'll configure prompts and settings manually — click <strong>Start fresh</strong>.</p>
-</li>
-<li>
-<p>Open <strong>Data Manager</strong> from the left ribbon and add a new Input argument:</p>
+<h3 id="1-create-the-agent-and-configure-arguments">1. Create the agent and configure arguments<a class="headerlink" href="#1-create-the-agent-and-configure-arguments" title="Permanent link">&para;</a></h3>
+<div class="img-cols img-cols-30">
+<div>
+<p>In <strong>Studio Web</strong>, add a new Agent to your solution.</p>
+<p>Remember that Solutions can have multiple components such as apps, automations, workflows and agents. Name it as
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2-Way Matching Agent
+</code></pre></div>
+  </p>
+</div>
+<div>
+<p><img alt="New agent created in Studio Web" class="screenshot" src="../configure-agent.images/2-create-agent.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p>Dismiss the Autopilot screen when you see the prompt to generate a new agent.</p>
+<p>Feel free to play with Autopilot later, but here you'll configure prompts and settings manually — click <strong>Start fresh</strong>.
+  </p>
+</div>
+<div>
+<p><img alt="Autopilot" class="screenshot" src="../configure-agent.images/3-autopilot.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-50">
+<div>
+<p>Just like a Robot, Agent has it's inputs and outputs, called Arguments. Click on <strong>Data Manager</strong> icon from the left ribbon and then click on "<strong>+</strong>" add a new Input argument:</p>
 <table>
 <thead>
 <tr>
@@ -955,159 +1020,195 @@
 </tr>
 <tr>
 <td>Description</td>
-<td>Invoice File</td>
+<td><code>Invoice File</code></td>
 </tr>
 </tbody>
 </table>
-<p><img alt="Input argument InvoicePDF configured as File type" class="screenshot" src="../configure-agent.images/2-input-argument.png" /></p>
-</li>
-<li>
-<p>For Output arguments, switch to editor mode.</p>
-<p><img alt="Switching to editor mode for output arguments" class="screenshot" src="../configure-agent.images/3-editor-mode.png" /></p>
-</li>
-<li>
-<p>Paste the following JSON into the editor:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;out_Status&quot;</span><span class="p">],</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;out_Status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status of matching - either &#39;Full Match&#39; or &#39;Failed Match&#39;&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&quot;out_DocumentsHTML&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTML code containing side by side comparison of Purchase Order and Invoice&quot;</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">&quot;out_SuggestedResponse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Suggested response to Invoice Supplier with description and request to mitigate issues&quot;</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">&quot;out_POID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Purchase Order ID extracted from Invoice PDF&quot;</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Outputs&quot;</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">}</span>
+<p>For Output arguments, copy paste below JSON into editor after switching to "<strong>Editor mode</strong>":
+  </p>
+</div>
+<div>
+<p><img alt="Input argument InvoicePDF configured as File type" class="screenshot" src="../configure-agent.images/4-arguments-input.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p><img alt="Switching to editor mode for output arguments" class="screenshot" src="../configure-agent.images/5-arguments-output-json.png" /></p>
+<p><img alt="Result" class="screenshot" src="../configure-agent.images/6-data-manager.png" />
+  </p>
+</div>
+<div>
+<p><strong>Output</strong> JSON schema:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="s2">&quot;out_Status&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">&quot;out_Status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status of matching - either &#39;Full Match&#39; or &#39;Failed Match&#39;&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">&quot;out_DocumentsHTML&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTML code containing side by side comparison of Purchase Order and Invoice&quot;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">&quot;out_SuggestedResponse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Suggested response to Invoice Supplier with description and request to mitigate issues&quot;</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">&quot;out_POID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Purchase Order ID extracted from Invoice PDF&quot;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Outputs&quot;</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">}</span>
 </code></pre></div>
-<p><img alt="Output arguments JSON pasted into editor" class="screenshot" src="../configure-agent.images/4-output-json.png" /></p>
-</li>
-<li>
-<p>Confirm all four output arguments are configured correctly.</p>
-<p><img alt="Output arguments configured" class="screenshot" src="../configure-agent.images/5-output-arguments.png" /></p>
-</li>
-</ol>
-<h3 id="part-2-configure-the-prompts">Part 2: Configure the prompts<a class="headerlink" href="#part-2-configure-the-prompts" title="Permanent link">&para;</a></h3>
-<p>System prompt is like human's work instructions. Let's start with something like this:</p>
+  </p>
+</div>
+</div>
+<h3 id="2-configure-the-prompts">2. Configure the prompts<a class="headerlink" href="#2-configure-the-prompts" title="Permanent link">&para;</a></h3>
+<div class="img-cols img-cols-30">
+<div>
+<p><img alt="ChatGPT wizdom" class="screenshot" src="../configure-agent.images/7-gpt-logo.png" />
+  </p>
+</div>
+<div>
 <blockquote>
-<p><em>"Precision in prompts, like in coding, leads to powerful and predictable results. If your prompt is messy, expect messy output. Treat it like code, and write every word with purpose!"</em> — another advice from gpt-4o</p>
+<p><strong><em>"Precision in prompts, like in coding, leads to powerful and predictable results. If your prompt is messy, expect messy output. Treat it like code, and write every word with purpose!"</em></strong> — another advice from gpt-4o
+  </p>
 </blockquote>
-<ol>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p>Prompts are configured in Agent's setting (open by clicking on the wrench icon).</p>
+<p>As you remember from previous exercise:</p>
+<ul>
 <li>
-<p>Enter the following <strong>User Prompt</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Analyze {{InvoicePDF}}.
-</code></pre></div>
-<p><img alt="User Prompt with InvoicePDF variable" class="screenshot" src="../configure-agent.images/6-user-prompt.png" /></p>
+<p><strong>System prompt</strong> is like human's work instructions, the "How".</p>
 </li>
 <li>
-<p>Enter the following <strong>System Prompt</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>You are an AI agent specialized in comparing Invoice PDFs with Purchase Orders. Your primary responsibilities are:
+<p><strong>User Prompt</strong> is the specific request or task input by the end user, the "What".
+  </p>
+</li>
+</ul>
+</div>
+<div>
+<p><img alt="User Prompt with InvoicePDF variable" class="screenshot" src="../configure-agent.images/8-prompts.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-50">
+<div>
+<p>Enter the following <strong>System Prompt</strong>:
+  </p>
+</div>
+<div></div>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">You</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">agent</span><span class="w"> </span><span class="n">specialized</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">comparing</span><span class="w"> </span><span class="n">Invoice</span><span class="w"> </span><span class="n">PDFs</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Orders</span><span class="p">.</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="n">primary</span><span class="w"> </span><span class="n">responsibilities</span><span class="w"> </span><span class="n">are</span><span class="o">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>1. Analyze the contents of an Invoice PDF file using the InvoicesIXP tool. Extract all relevant information including company details, line items, totals, and tax information. Trigger Escalation if confidence falls beyond 60%.
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="mf">1.</span><span class="w"> </span><span class="n">Analyze</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">Invoice</span><span class="w"> </span><span class="n">PDF</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">InvoicesIXP</span><span class="w"> </span><span class="n">tool</span><span class="p">.</span><span class="w"> </span><span class="n">Extract</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="n">company</span><span class="w"> </span><span class="n">details</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">totals</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="n">information</span><span class="p">.</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="n">Escalation</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">confidence</span><span class="w"> </span><span class="n">falls</span><span class="w"> </span><span class="n">beyond</span><span class="w"> </span><span class="mi">60</span><span class="o">%</span><span class="p">.</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>2. Use the Retrieve PO Data tool to fetch Purchase Order data from the Data Fabric. The Purchase Order ID should be extracted from the Invoice. If the PO data cannot be retrieved, use Escalation.
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="mf">2.</span><span class="w"> </span><span class="n">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Retrieve</span><span class="w"> </span><span class="n">PO</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">tool</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">fetch</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">Fabric</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">extracted</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Invoice</span><span class="p">.</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">PO</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">retrieved</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">Escalation</span><span class="p">.</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>3. Compare the Invoice details with the Purchase Order information. Identify and list any mismatches or discrepancies between the two documents. Pay special attention to:
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>   - Company names and details
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>   - Line items (product names, quantities, prices)
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>   - Totals and subtotals
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>   - Tax information
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>   - Dates (order date, delivery date, payment due date)
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="mf">3.</span><span class="w"> </span><span class="n">Compare</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Invoice</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">information</span><span class="p">.</span><span class="w"> </span><span class="n">Identify</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">mismatches</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">discrepancies</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">documents</span><span class="p">.</span><span class="w"> </span><span class="n">Pay</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">attention</span><span class="w"> </span><span class="n">to</span><span class="o">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Company</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">details</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Line</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">quantities</span><span class="p">,</span><span class="w"> </span><span class="n">prices</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Totals</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">subtotals</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Tax</span><span class="w"> </span><span class="n">information</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Dates</span><span class="w"> </span><span class="p">(</span><span class="n">order</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">delivery</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">payment</span><span class="w"> </span><span class="n">due</span><span class="w"> </span><span class="n">date</span><span class="p">)</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>4. Handle any unexpected data formats or missing information gracefully. If crucial information is missing from either document, note this in your analysis and use Escalation.
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="mf">4.</span><span class="w"> </span><span class="n">Handle</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">unexpected</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">formats</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">missing</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">gracefully</span><span class="p">.</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">crucial</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">missing</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">analysis</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">Escalation</span><span class="p">.</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>5. Provide a clear, concise report of your findings, highlighting any issues that require attention.
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="mf">5.</span><span class="w"> </span><span class="n">Provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">clear</span><span class="p">,</span><span class="w"> </span><span class="n">concise</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">findings</span><span class="p">,</span><span class="w"> </span><span class="n">highlighting</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">issues</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">require</span><span class="w"> </span><span class="n">attention</span><span class="p">.</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>You should be thorough in your analysis, checking for discrepancies in items, quantities, prices, dates, and any other relevant fields. Always maintain a professional and objective tone in your reports.
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">You</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">thorough</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">analysis</span><span class="p">,</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">discrepancies</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">quantities</span><span class="p">,</span><span class="w"> </span><span class="n">prices</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="w"> </span><span class="n">Always</span><span class="w"> </span><span class="n">maintain</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">professional</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">objective</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">reports</span><span class="p">.</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>out_Status: Status of comparison should be:
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>- &quot;Full Match&quot; - if Invoice and Purchase order match fully. Every line item in PO matched to Invoice line items, company name and details match, total and tax information matches.
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>- &quot;Failed Match&quot; - if there are items that cannot be matched or other details do not align.
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="nl">out_Status</span><span class="p">:</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">comparison</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="o">:</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="s">&quot;Full Match&quot;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">Invoice</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="n">fully</span><span class="p">.</span><span class="w"> </span><span class="n">Every</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">PO</span><span class="w"> </span><span class="n">matched</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Invoice</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">company</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">match</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">matches</span><span class="p">.</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="s">&quot;Failed Match&quot;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">there</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">matched</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">align</span><span class="p">.</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>out_DocumentsHTML: If match is not successful, generate HTML code containing side by side comparison of Purchase Order and Invoice, including Company details, document Line Items, Total and Tax information.
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>- Use a table structure with three columns: Field, Purchase Order, Invoice.
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>- Field titles should be placed in the leftmost column.
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>- Tax value should include tax rate and tax name, if available.
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>- Line items should be displayed as sub-tables inside the main table cell, aligned top.
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>- Cells with discrepancies should have a light red background, both in the main table and in cells of line items sub-tables.
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>- Set the table width property to 100%.
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>- Use appropriate HTML tags for headers, rows, and data cells.
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="nl">out_DocumentsHTML</span><span class="p">:</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">successful</span><span class="p">,</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">containing</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="n">comparison</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Invoice</span><span class="p">,</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="n">Company</span><span class="w"> </span><span class="n">details</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="n">Line</span><span class="w"> </span><span class="n">Items</span><span class="p">,</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Tax</span><span class="w"> </span><span class="n">information</span><span class="p">.</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Use</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">structure</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">three</span><span class="w"> </span><span class="n">columns</span><span class="o">:</span><span class="w"> </span><span class="n">Field</span><span class="p">,</span><span class="w"> </span><span class="n">Purchase</span><span class="w"> </span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Invoice</span><span class="p">.</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Field</span><span class="w"> </span><span class="n">titles</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">placed</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">leftmost</span><span class="w"> </span><span class="n">column</span><span class="p">.</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Tax</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="n">rate</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">available</span><span class="p">.</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Line</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">displayed</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">sub</span><span class="o">-</span><span class="n">tables</span><span class="w"> </span><span class="n">inside</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">cell</span><span class="p">,</span><span class="w"> </span><span class="n">aligned</span><span class="w"> </span><span class="n">top</span><span class="p">.</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Cells</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">discrepancies</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">light</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">both</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">sub</span><span class="o">-</span><span class="n">tables</span><span class="p">.</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="p">.</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Use</span><span class="w"> </span><span class="n">appropriate</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">tags</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span>
 <a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>out_SuggestedResponse: If match is not successful, draft the invoice rejection email to the supplier.
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>- The email should have HTML formatting.
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>- Start with &quot;Dear Supplier&quot; and do not include a Subject line or placeholders. Sign the email as &quot;Payments Team&quot;.
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>- Display product names, prices, and other data from documents in bold text.
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>- Include a bullet list with reasons for rejection, i.e., discrepancies that can&#39;t be matched, and a request to adjust the invoice and resend.
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>- In the bullet list, do not include items if that individual item is considered a match. Only list items that do not follow the rules.
-<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>- Maintain a professional and courteous tone throughout the email.
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="nl">out_SuggestedResponse</span><span class="p">:</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">successful</span><span class="p">,</span><span class="w"> </span><span class="n">draft</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">invoice</span><span class="w"> </span><span class="n">rejection</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">supplier</span><span class="p">.</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">formatting</span><span class="p">.</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Start</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="s">&quot;Dear Supplier&quot;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Subject</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">placeholders</span><span class="p">.</span><span class="w"> </span><span class="n">Sign</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="s">&quot;Payments Team&quot;</span><span class="p">.</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Display</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">prices</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">documents</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">bold</span><span class="w"> </span><span class="n">text</span><span class="p">.</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Include</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">bullet</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">reasons</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">rejection</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">e</span><span class="p">.,</span><span class="w"> </span><span class="n">discrepancies</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">can</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">matched</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">adjust</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">invoice</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">resend</span><span class="p">.</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bullet</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">individual</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">considered</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">match</span><span class="p">.</span><span class="w"> </span><span class="n">Only</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">follow</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rules</span><span class="p">.</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Maintain</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">professional</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">courteous</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">throughout</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">email</span><span class="p">.</span>
 <a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>Always double-check your analysis and outputs for accuracy before finalizing your response.
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="n">Always</span><span class="w"> </span><span class="kt">double</span><span class="o">-</span><span class="n">check</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">analysis</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">outputs</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">finalizing</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">response</span><span class="p">.</span>
 </code></pre></div>
-<p><img alt="System Prompt configured" class="screenshot" src="../configure-agent.images/7-system-prompt.png" /></p>
-</li>
-</ol>
-<h3 id="part-3-add-the-ixp-tool">Part 3: Add the IXP tool<a class="headerlink" href="#part-3-add-the-ixp-tool" title="Permanent link">&para;</a></h3>
+<div class="img-cols img-cols-30">
+<div>
+<p>Enter the following <strong>User Prompt</strong>:
+  </p>
+</div>
+<div>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Analyze {{InvoicePDF}}.
+</code></pre></div>
+  </p>
+</div>
+</div>
+<h3 id="3-add-the-ixp-and-po-retrieval-tools">3. Add the IXP and PO retrieval tools<a class="headerlink" href="#3-add-the-ixp-and-po-retrieval-tools" title="Permanent link">&para;</a></h3>
 <p>Next, our agent will need tools that we mentioned in the system prompt:</p>
 <ul>
 <li><strong>InvoicesIXP</strong> tool — uses the existing Invoice IXP project for data extraction</li>
-<li>
-<p><strong>Retrieve PO Data</strong> tool — looks up Purchase Order details using the extracted PO ID</p>
-</li>
-<li>
-<p>In canvas mode, select your agent and add a new Tool.</p>
-<p><img alt="Tools section, adding a new tool" class="screenshot" src="../configure-agent.images/8-add-tool.png" /></p>
-</li>
-<li>
-<p>Select <strong>IXP</strong> from the toolbox and choose the <strong>InvoicesIXP</strong> project.</p>
-<p><img alt="InvoicesIXP project selected" class="screenshot" src="../configure-agent.images/9-ixp-project.png" /></p>
-</li>
-<li>
-<p>Add a meaningful description, for example: <strong>Invoice Data extraction tool</strong>.</p>
-<p><img alt="IXP tool description configured" class="screenshot" src="../configure-agent.images/10-ixp-description.png" /></p>
-<p>It's an out-of-the-box Invoice extraction model with standard taxonomy. You will not be able to see the tool configuration. It will return a JSON object containing extraction data. That's it!</p>
-</li>
-<li>
-<p>Save the IXP tool configuration.</p>
-<p><img alt="IXP tool saved and visible in the tools list" class="screenshot" src="../configure-agent.images/11-ixp-tool-saved.png" /></p>
-</li>
+<li><strong>Retrieve PO Data</strong> tool — looks up Purchase Order details using the extracted PO ID</li>
 </ul>
-<h3 id="part-4-build-and-add-the-po-lookup-tool">Part 4: Build and add the PO lookup tool<a class="headerlink" href="#part-4-build-and-add-the-po-lookup-tool" title="Permanent link">&para;</a></h3>
+<div class="img-cols img-cols-30">
+<div>
+<p>In canvas mode, select your agent and add a new Tool by clicking "<strong>+</strong>".</p>
+<p>You will be able to see the IXP configuration inside IXP section of UiPath Cloud. Let's not deep dive into IXP configuration as pat of this exercise.
+  </p>
+</div>
+<div>
+<p><img alt="Tools section, adding a new tool" class="screenshot" src="../configure-agent.images/9-ixp-tool.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p>Select <strong>IXP</strong> from the toolbox and choose the <strong>InvoicesIXP</strong> project.</p>
+<p>Add a meaningful description, for example: 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Invoice Data extraction tool.
+</code></pre></div>
+<strong>InvoicesIXP</strong> is an out-of-the box extraction model with predefined standard Invoice taxonomy. It will return <strong>JSON object</strong> containing extraction data.
+  </p>
+</div>
+<div>
+<p><img alt="InvoicesIXP project selected" class="screenshot" src="../configure-agent.images/10-ixp-project.png" />
+  </p>
+</div>
+</div>
+<p>That's it for Invoice extraction!</p>
+<p><img alt="IXP tool saved and visible in the tools list" class="screenshot" src="../configure-agent.images/11-ixp-tool-saved.png" /></p>
+<h3 id="4-build-and-add-the-po-lookup-tool">4. Build and add the PO lookup tool<a class="headerlink" href="#4-build-and-add-the-po-lookup-tool" title="Permanent link">&para;</a></h3>
 <p>Next, let's build the <strong>Retrieve PO Data</strong> tool as a new RPA workflow. PO data is stored in Data Fabric and we can look up records using POID.</p>
-<ol>
-<li>
 <p>Add a new RPA workflow to your solution. Give it a meaningful name, like always.</p>
 <p><img alt="New RPA workflow added to solution" class="screenshot" src="../configure-agent.images/12-new-rpa-workflow.png" /></p>
-</li>
-<li>
 <p>Configure the input and output variables for the workflow. Return the PODATA field from the entity.</p>
 <p><img alt="Input and output variables configured" class="screenshot" src="../configure-agent.images/13-workflow-variables.png" /></p>
-</li>
-<li>
 <p>Add a <strong>Query Entity Records</strong> activity configured to query the <strong>PurchaseOrdersDatabase</strong> entity. Apply the filter: <strong>POID equals in_POID</strong>.</p>
 <p><img alt="Query Entity Records activity with POID filter" class="screenshot" src="../configure-agent.images/14-query-entity-records.png" /></p>
-</li>
-<li>
 <p>Back in your agent's canvas, add this RPA workflow as a tool.</p>
 <p><img alt="RPA workflow added as a tool" class="screenshot" src="../configure-agent.images/15-rpa-tool-added.png" /></p>
-</li>
-<li>
 <p>Configure the input hint for the <strong>in_POID</strong> argument so the agent knows the expected format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Purchase Order ID. It starts with &#39;PO-&#39; followed by a few digits, for example: &#39;PO-123456&#39;.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Purchase Order ID. It starts with &#39;PO-&#39; followed by a few digits, for example: &#39;PO-123456&#39;.
 </code></pre></div>
-<p><img alt="Both tools saved and visible in tools list" class="screenshot" src="../configure-agent.images/16-both-tools.png" /></p>
-</li>
-</ol>
+<div class="highlight"><pre><span></span><code>![Both tools saved and visible in tools list](configure-agent.images/16-both-tools.png){ .screenshot }
+</code></pre></div>
 <p>Usually you would need to retrieve PO from a more complex environment like SAP or NetSuite, and also handle exceptions. But in this case you got away really easy — well done! ;)</p>
 <h3 id="part-5-test-the-agent">Part 5: Test the agent<a class="headerlink" href="#part-5-test-the-agent" title="Permanent link">&para;</a></h3>
 <ol>
@@ -1154,21 +1255,33 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="Input mapping from robot output to agent input" class="screenshot" src="../configure-agent.images/23-input-mapping.png" /></p>
-<p>Note that Agent's outputs were also automatically added to the workflow, so you can use them right away when configuring the Exclusive Gateway.</p>
-</li>
-<li>
-<p>Let's look at Agent's Status (<code>out_Status</code>) and direct the process to the next step — either sending the invoice for payment, or towards manual review. Configure the <strong>Exclusive Gateway</strong> after the agent task.</p>
-<p>Set the expression for the <strong>Full Match</strong> path. Note that using <code>ToLower()</code> makes it a bit more reliable:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vars.outStatus.ToLower()==&quot;full match&quot;
-</code></pre></div>
-<p>You can test various expected inputs right in the expression editor. Set <strong>Failed Match</strong> as the default path.</p>
-</li>
-<li>
-<p>Click <strong>Debug</strong> and confirm the gateway routes correctly based on the agent's output. This time we want to see execution of the Agent and how Agent's output changes the direction of the execution flow from the default path.</p>
-<p><img alt="Process debug run showing correct gateway routing" class="screenshot" src="../configure-agent.images/24-gateway-routing.png" /></p>
 </li>
 </ol>
+<div class="img-cols img-cols-70">
+<div>
+<p><img alt="Input mapping from robot output to agent input" class="screenshot" src="../configure-agent.images/23-input-mapping.png" />
+  </p>
+</div>
+<div>
+<p>Note that Agent's outputs were also automatically added to the workflow, so you can use them right away when configuring the <strong>Exclusive Gateway</strong>.
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p>Let's look at Agent's Status (<code>out_Status</code>) and direct the process to the next step — either sending the invoice for payment, or towards manual review. Configure the <strong>Exclusive Gateway</strong> after the agent task.</p>
+<p>Set the expression for the <strong>Full Match</strong> path. Note that using <code>ToLower()</code> makes it a bit more reliable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vars.outStatus.ToLower()==&quot;full match&quot;
+</code></pre></div>
+<p>You can test various expected inputs right in the expression editor. Set <strong>Failed Match</strong> as the default path.
+  </p>
+</div>
+<div>
+<p><img alt="Process debug run showing correct gateway routing" class="screenshot" src="../configure-agent.images/24-gateway-routing.png" />
+  </p>
+</div>
+</div>
+<p>Click <strong>Debug</strong> and confirm the gateway routes correctly based on the agent's output. This time we want to see execution of the Agent and how Agent's output changes the direction of the execution flow from the default path.</p>
 <p>Your agent is ready. However, in most cases you will need to come back multiple times and improve the prompt in order for it to be more flexible — this way users need to perform less manual validation and it will work more reliably.</p>
 <p><a href="../configure-robot/">← Configure a Robot</a> | <a href="../configure-human-validation/">Next: Configure Human Validation →</a></p>
 
