@@ -1,10 +1,16 @@
-# Next Steps
+# Thank you for participating in the Agentic Automation Workshop!
 
-**You've built a complete agentic orchestration. Here's what to do next.**
+**Leveraging UiPath Platform services has never been so easy!**
 
 ---
 
-## What You Accomplished
+## You did it!
+
+Your first agentic orchestration process is complete! You can now publish it to your personal workspace and run it just like any other process on the UiPath Platform: it will trigger the right robotic and agentic jobs automatically, in the right sequence, involving humans only when needed.
+
+After a few runs of the published process, head over to Maestro to explore the execution details for each transaction. The analytics view will give you a clear picture of how the process flows end-to-end.
+
+Here how it should look like:
 
 By completing these exercises, you built a production-pattern automation that combines:
 
@@ -72,5 +78,5 @@ The real learning happens in experimentation:
 
 ---
 
-!!! tip "Questions?"
+!!! tip "Suggestions on the content and exercises?"
     Contact: sergey.shumilov@uipath.com

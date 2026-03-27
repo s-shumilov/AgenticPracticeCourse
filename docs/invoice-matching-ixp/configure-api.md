@@ -1,4 +1,4 @@
-# Update external systems using API
+# Talking to external services
 
 !!! tip "Here is our plan for this lesson:"
 
@@ -39,12 +39,18 @@ Platform administrators have prepared these connections for automation use and m
 
     ![Gmail Connector and shared connection selected](configure-api.images/2-gmail-connector.png){ .screenshot }
 
-4. Configure the **Send Email** activity:
-   - **To:** send it to yourself or a colleague.
-   - **Subject:** generate a suitable subject.
-   - **Body:** select `out_SuggestedResponse` — the HTML rejection email drafted by the agent and reviewed during human validation.
+<div class="img-cols img-cols-50" markdown>
+  <div markdown>
+Configure the **Send Email** activity:
 
-    ![Email configured with body from out_SuggestedResponse](configure-api.images/3-email-configured.png){ .screenshot }
+- **To:** send it to yourself or a colleague.
+- **Subject:** generate a suitable subject.
+- **Body:** select `out_SuggestedResponse` — the HTML rejection email drafted by the agent and reviewed during human validation.
+  </div>
+  <div markdown>
+![Email configured with body from out_SuggestedResponse](configure-api.images/3-email-configured.png){ .screenshot }
+  </div>
+</div>
 
 5. Save the task.
 
@@ -58,9 +64,14 @@ For approved invoices, pass the invoice data to the payments team. They use thei
 
     ![Execute Connector Activity on Approve path](configure-api.images/4-approve-connector.png){ .screenshot }
 
-8. Maestro/Agentic Orchestration works with Data Service via Integration Service, so select the **Data Fabric connector** and configure it with the specified parameters.
-
-    ![Data Fabric connector configured](configure-api.images/5-data-fabric-connector.png){ .screenshot }
+<div class="img-cols img-cols-30" markdown>
+  <div markdown>
+Maestro/Agentic Orchestration works with Data Service via Integration Service, so select the **Data Fabric connector** and configure it with the specified parameters.
+  </div>
+  <div markdown>
+![Data Fabric connector configured](configure-api.images/5-data-fabric-connector.png){ .screenshot }
+  </div>
+</div>
 
 ### Part 3: Test both scenarios
 
@@ -78,4 +89,4 @@ Everything works as planned!
 
 The process is complete. It retrieves invoice PDFs, extracts and validates data using IXP, routes exceptions to human review, sends rejection emails, and stores approved records — all orchestrated by Maestro.
 
-[← Configure Human Validation](configure-human-validation.md) | [Back to Overview](index.md)
+[← Configure Human Validation](configure-human-validation.md) | [Next: You did it! →](you-did-it.md)

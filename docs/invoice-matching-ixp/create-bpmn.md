@@ -60,11 +60,8 @@ For this exercise, focus on steps 2–4. The simplified process:
 3. Export the diagram as a `.bpmn` file. You'll import it into Maestro in the next step. Alternatively, download and use this **[sample BPMN file](dependencies/2-Way%20Matching%20Process.bpmn)**.
 
 
-<div class="img-cols img-cols-30-70" markdown>
-<div markdown>
+[[[
 ![Wise robot](create-bpmn.images/2-wise-robot.png){ .screenshot }
-</div>
-<div markdown>
-In later steps, you'll connect each task in this diagram to UiPath platform components. When the process runs, Orchestrator will trigger robotic and agentic jobs — or route tasks to humans. Let's add some action into this diagram by **[adding a Robot](configure-robot.md)**! 
-</div>
-</div>
+|30|
+In later steps, you'll connect each task in this diagram to UiPath platform components. When the process runs, Orchestrator will trigger robotic and agentic jobs — or route tasks to humans. Let's add some action into this diagram by **[adding a Robot](configure-robot.md)**!
+]]]

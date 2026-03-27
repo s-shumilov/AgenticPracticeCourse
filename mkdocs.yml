@@ -24,6 +24,9 @@ theme:
     - content.code.copy
     - content.tabs.link
 
+hooks:
+  - hooks/split_cols.py
+
 plugins:
   - search
 
@@ -56,6 +59,7 @@ nav:
     - 3. Configure an Agent: invoice-matching-ixp/configure-agent.md
     - 4. Configure Human Validation: invoice-matching-ixp/configure-human-validation.md
     - 5. Configure API Integration: invoice-matching-ixp/configure-api.md
+    - You did it!: invoice-matching-ixp/you-did-it.md
   - Next Steps: next-steps.md
 
 extra_css:

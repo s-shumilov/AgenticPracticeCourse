@@ -1,4 +1,4 @@
-# Add an Action App for human validation
+# Involving humans only when necessary
 
 !!! tip "Here is our plan for this lesson:"
 
@@ -60,22 +60,32 @@ Let's open the Agentic Process again and configure the validation task as an Act
 
     ![Action App Task selected](configure-human-validation.images/3-action-app-task.png){ .screenshot }
 
-5. Select the **2WM Validation App IXP** you imported.
+<div class="img-cols img-cols-30" markdown>
+  <div markdown>
+Select the **2WM Validation App IXP** you imported.
 
-6. Customize the task title so it's easy to identify in Action Center later, for example: **Invoice Review Required**.
+Customize the task title so it's easy to identify in Action Center later, for example: **Invoice Review Required**.
 
-7. In **Advanced Options**, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.
+In **Advanced Options**, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.
+  </div>
+  <div markdown>
+![Task configured with title and assignee](configure-human-validation.images/4-task-configured.png){ .screenshot }
+  </div>
+</div>
 
-    ![Task configured with title and assignee](configure-human-validation.images/4-task-configured.png){ .screenshot }
+<div class="img-cols img-cols-50" markdown>
+  <div markdown>
+The App should pick the Agent's outputs as App inputs — just the way we did with the agent. Here you might again see the true value of following naming conventions!
 
-8. The App should pick the Agent's outputs as App inputs — just the way we did with the agent. Here you might again see the true value of following naming conventions!
-
-    | Agent output | App input |
-    |-------------|-----------|
-    | `out_DocumentsHTML` | Comparison display field |
-    | `out_SuggestedResponse` | Suggested rejection email field |
-
-    ![Agent outputs mapped to app inputs](configure-human-validation.images/5-input-mapping.png){ .screenshot }
+| Agent output | App input |
+|-------------|-----------|
+| `out_DocumentsHTML` | Comparison display field |
+| `out_SuggestedResponse` | Suggested rejection email field |
+  </div>
+  <div markdown>
+![Agent outputs mapped to app inputs](configure-human-validation.images/5-input-mapping.png){ .screenshot }
+  </div>
+</div>
 
 9. Save the task configuration.
 
@@ -89,15 +99,20 @@ One last step in this lesson — let's configure the downstream flow based on th
 
     ![Exclusive Gateway configured](configure-human-validation.images/7-exclusive-gateway.png){ .screenshot }
 
-11. Set **Reject** as the default path (note that a real business process might have a different approach).
+<div class="img-cols img-cols-30" markdown>
+  <div markdown>
+Set **Reject** as the default path (note that a real business process might have a different approach).
 
-12. In the Expression Editor, pick the **Action** output — which per the app settings can be `"Approve"` or `"Reject"`. Configure the **Approve** path condition:
+In the Expression Editor, pick the **Action** output — which per the app settings can be `"Approve"` or `"Reject"`. Configure the **Approve** path condition:
 
-    ```text
-    vars.actionOutput == "Approve"
-    ```
-
-    ![Expression Editor with Approve condition](configure-human-validation.images/8-approve-condition.png){ .screenshot }
+```text
+vars.actionOutput == "Approve"
+```
+  </div>
+  <div markdown>
+![Expression Editor with Approve condition](configure-human-validation.images/8-approve-condition.png){ .screenshot }
+  </div>
+</div>
 
 ### Part 4: Test the human validation flow
 
