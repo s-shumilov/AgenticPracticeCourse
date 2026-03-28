@@ -70,11 +70,11 @@ Exercise overview pages use label: `Overview`.
 8. `!!! tip "Training Environment"` callout at the bottom
 
 ### Step page (`<exercise>/<step>.md`)
-1. `# Step N — Verb Noun` (or a descriptive title if not sequential)
-2. `!!! tip "Let's start"` admonition — numbered list of 2–3 actions for this step (what the learner will do)
+1. `# Title` — either `Step N — Verb Noun` for sequential steps, or a descriptive phrase. Capitalisation and exact phrasing can vary.
+2. Opening `!!! tip` admonition — numbered list of 2–3 actions for this step (what the learner will do). Title text can vary ("Let's start", "Here is our plan", etc.).
 3. `## Goal` — one short paragraph: what the learner will have built by the end
 4. Conceptual sections (one `##` per key concept or sub-task)
-5. `## Steps` (or a descriptive heading) — numbered step-by-step instructions; use a placeholder comment if not yet written
+5. `## Steps` (or a descriptive heading) — numbered step-by-step instructions; use a placeholder comment if not yet written. Stub or optional sections without placeholder content are acceptable.
 
 ---
 
@@ -121,8 +121,8 @@ MkDocs Material adds a copy-to-clipboard button automatically to every code bloc
 Rules:
 - The code block must contain exactly what the learner pastes — no surrounding explanation, no placeholder comments inside the block, no extra blank lines at start/end.
 - If a page shows a prompt that the learner enters into Agent Builder or any text field, that prompt goes in a code block. If the prompt is later updated on the page, update the code block too — they must always be identical.
-- Use language identifiers: ` ```yaml `, ` ```json `, ` ```python `, ` ```text ` (for prompts and plain text). Never leave the opening fence bare unless the content is truly language-agnostic pseudocode.
-- Pseudocode / logic flows use ` ```text `.
+- Choose a language identifier that produces the most readable syntax highlighting for the content — not strict language correctness. Common choices: ` ```yaml `, ` ```json `, ` ```python `, ` ```cpp `, ` ```css `, ` ```text `. Never leave the opening fence bare.
+- Plain prose with no keywords to highlight uses ` ```text `. Pseudocode / logic flows also use ` ```text `.
 
 ### Lists
 - Numbered lists: sequential steps only.

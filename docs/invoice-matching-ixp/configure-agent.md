@@ -37,7 +37,7 @@ LLMs are ideal for this job — they can analyze large amounts of text in any fo
 [[[
 Here is the structure of the agent's inputs and outputs, as well as Tools that agent will require to perform the task:
 |30|
-![SAgent's inputs and outputs](configure-agent.images/1-agent-structure.png){ .screenshot }
+![Agent's inputs and outputs](configure-agent.images/1-agent-structure.png){ .screenshot }
 ]]]
 
 
@@ -62,14 +62,14 @@ Remember that Solutions can have multiple components such as apps, automations, 
 [[[
 Dismiss the Autopilot screen when you see the prompt to generate a new agent.
 
-Feel free to play with Autopilot later, but here you'll configure prompts and settings manually — click **Start fresh**.
+You can explore Autopilot later. For now, you'll configure prompts and settings manually — click **Start fresh**.
 |30|
 ![Autopilot](configure-agent.images/3-autopilot.png){ .screenshot }
 ]]]
 
 
 [[[
-Just like a Robot, Agent has it's inputs and outputs, called Arguments. Click on **Data Manager** icon from the left ribbon and then click on "**+**" add a new Input argument:
+Just like a Robot, Agent has its inputs and outputs, called Arguments. Click on **Data Manager** icon from the left ribbon and then click on "**+**" add a new Input argument:
 
 | Field | Value |
 |-------|-------|
@@ -211,7 +211,7 @@ Next, our agent will need tools that we mentioned in the system prompt:
 [[[
 In canvas mode, select your agent and add a new Tool by clicking "**+**".
 
-You will be able to see the IXP configuration inside IXP section of UiPath Cloud. Let's not deep dive into IXP configuration as pat of this exercise.
+You will be able to see the IXP configuration inside IXP section of UiPath Cloud. Let's not deep dive into IXP configuration as part of this exercise.
 |30|
 ![Tools section, adding a new tool](configure-agent.images/9-ixp-tool.png){ .screenshot }
 ]]]
@@ -228,100 +228,117 @@ Invoice Data extraction tool.
 ![InvoicesIXP project selected](configure-agent.images/10-ixp-project.png){ .screenshot }
 ]]]
 
-That's it for Invoice extraction!
-
-![IXP tool saved and visible in the tools list](configure-agent.images/11-ixp-tool-saved.png){ .screenshot }
+That's all we need to do to enable Invoice extraction!
 
 ### 4. Build and add the PO lookup tool
 
 Next, let's build the **Retrieve PO Data** tool as a new RPA workflow. PO data is stored in Data Fabric and we can look up records using POID.
 
-Add a new RPA workflow to your solution. Give it a meaningful name, like always.
-
-![New RPA workflow added to solution](configure-agent.images/12-new-rpa-workflow.png){ .screenshot }
-
-Configure the input and output variables for the workflow. Return the PODATA field from the entity.
-
-![Input and output variables configured](configure-agent.images/13-workflow-variables.png){ .screenshot }
-
-Add a **Query Entity Records** activity configured to query the **PurchaseOrdersDatabase** entity. Apply the filter: **POID equals in_POID**.
-
-![Query Entity Records activity with POID filter](configure-agent.images/14-query-entity-records.png){ .screenshot }
-
-Back in your agent's canvas, add this RPA workflow as a tool.
-
-![RPA workflow added as a tool](configure-agent.images/15-rpa-tool-added.png){ .screenshot }
-
-Configure the input hint for the **in_POID** argument so the agent knows the expected format:
-
-```text
-Purchase Order ID. It starts with 'PO-' followed by a few digits, for example: 'PO-123456'.
-```
-
-    ![Both tools saved and visible in tools list](configure-agent.images/16-both-tools.png){ .screenshot }
-
-Usually you would need to retrieve PO from a more complex environment like SAP or NetSuite, and also handle exceptions. But in this case you got away really easy — well done! ;)
-
-### Part 5: Test the agent
-
-17. Test the agent with a sample PDF invoice. Confirm the agent calls the IXP tool first.
-
-    ![Agent test execution started with PDF input](configure-agent.images/17-agent-test.png){ .screenshot }
-
-18. Review the IXP extraction results and verify the agent identified the PO ID correctly.
-
-    ![IXP extraction results with PO ID identified](configure-agent.images/18-ixp-results.png){ .screenshot }
-
-19. Confirm the agent called the PO lookup tool with the extracted PO ID.
-
-    ![PO lookup tool called with extracted POID](configure-agent.images/19-po-lookup.png){ .screenshot }
-
-20. Review the final output. Verify `out_Status`, `out_DocumentsHTML`, `out_SuggestedResponse`, and `out_POID` are all populated.
-
-    ![Agent output variables fully populated](configure-agent.images/20-output-variables.png){ .screenshot }
-
-    ![HTML comparison output preview](configure-agent.images/21-html-comparison.png){ .screenshot }
-
-Investigate carefully — there are no errors here. It's just that the Vendor sent an Invoice that is differently formatted, and some descriptions are not identical but very similar. The Agent will only follow our specific instructions in the Prompt, and the current prompt doesn't mention anything about such "similar" items, or the possibility of splitting 1 PO line item into multiple Invoice line items.
-
-As with any automation, our objective with the prompts is to cover as many cases as possible.
-
-### Part 6: Connect the agent to Maestro
-
-Let's get back to **Studio Web** and continue editing our Agentic Process.
-
-21. Return to your **Maestro Agentic Process** and configure the second task. Set the action to **Start and wait for agent**, then search for the agent in your solution (Defined Resources) and select it.
-
-    ![Agent task configured in Maestro](configure-agent.images/22-agent-task-maestro.png){ .screenshot }
-
-22. Pick outputs from the previous RPA Task (Retrieve Invoice PDF) and add them as inputs to the Agent — here is how you do it in your Agent Task's Settings:
-
-    | Robot output | Agent input |
-    |-------------|-------------|
-    | `out_FileName` | `InvoicePDF` |
-
 [[[
-![Input mapping from robot output to agent input](configure-agent.images/23-input-mapping.png){ .screenshot }
+Add a new RPA Workflow into your solution. Give it a meaningful name, like always:
+
+![New RPA workflow added to solution](configure-agent.images/11-add-rpa.png){ .screenshot }
+
+Then, configure the input and output arguments for the workflow:
+
+- Receive Purchase Order ID as **in_POID**. 
+- Return the **PODATA** field from the entity as **out_POJSON**.
+
 |70|
-Note that Agent's outputs were also automatically added to the workflow, so you can use them right away when configuring the **Exclusive Gateway**.
+
+![Input and output variables configured](configure-agent.images/12-rpa-arguments.png){ .screenshot }
+
 ]]]
 
+In order to retrieve data from **Data Fabric**, configure the activity to **Query Entity Records** from **PurchaseOrdersDatabase**. 
+
+
+![Add activity Query Entity Records](configure-agent.images/13-rpa-activities.png){ .screenshot }
+
+
 [[[
-Let's look at Agent's Status (`out_Status`) and direct the process to the next step — either sending the invoice for payment, or towards manual review. Configure the **Exclusive Gateway** after the agent task.
+Inside of **Main.xaml** workflow, add a **Query Entity Records** activity (from **Data Service**) configured to query from the **PurchaseOrdersDatabase** entity. 
 
-Set the expression for the **Full Match** path. Note that using `ToLower()` makes it a bit more reliable:
+|30|
 
-```text
+![Query Entity Records activity with POID filter](configure-agent.images/14-add-query-entity.png){ .screenshot }
+]]]
+
+
+[[[
+
+Apply the filter: **POID equals in_POID**.
+
+|30|
+
+![Query Entity Records activity with POID filter](configure-agent.images/15-query-entity.png){ .screenshot }
+
+]]]
+
+Here is what you should get in the end:
+
+![RPA workflow view](configure-agent.images/16-rpa-complete.png){ .screenshot }
+
+[[[
+Back in your Agent's canvas, add this RPA Workflow as a Tool.
+
+Just in case, give a hint to Agent about **in_POID** input argument:
+```
+Purchase Order ID. it starts with "PO-" followed by few digits, for example: "PO-123456"
+```
+
+Done. 
+
+|30|
+![RPA workflow added as a tool](configure-agent.images/17-add-rpa-tool.png){ .screenshot }
+]]]
+
+In a real environment, you'd typically retrieve PO data from a system like SAP or NetSuite and handle exceptions along the way. This simplified version keeps the focus on the agent configuration.
+
+
+### 5. Quality Control and Evaluations
+
+Think about what could be the right way to test this agent and make sure that future changes in prompts or in LLM model do not affect the results?
+
+### 6. Integrate the agent into Maestro workflow
+
+Let's configure the second task to use the agent you just built, and set up the gateway that routes the workflow based on the agent's output.
+
+[[[
+In **Studio Web** return to your **Maestro Agentic Process** and configure the second task. Set the action to **Start and wait for agent**, then search for the agent in your solution (Defined Resources) and select it.
+|30|
+![Agent task configured in Maestro](configure-agent.images/18-add-agent.png){ .screenshot }
+]]]
+
+Pick outputs from the previous RPA Task (**Retrieve Invoice PDF**) and add them as inputs to the Agent — here is how you do it in your Agentic Task's Settings:
+
+![Input mapping from robot output to agent input](configure-agent.images/19-agent-arguments.png){ .screenshot }
+
+[[[
+Note that Agent's outputs were also automatically added to the workflow, so you can use them right away when configuring the **Exclusive Gateway**.
+|50|
+![Automatically generated Agent's outputs](configure-agent.images/20-agent-outputs.png){ .screenshot }
+]]]
+
+Let's use Agent's Status (`out_Status`) and direct the process to the next step — either sending the invoice for payment, or towards manual review. 
+
+Configure conditions as per the image. Note that expressions in condition allow using complex calculations, if required. For example, using **ToLower** function will make it a bit more reliable.
+
+```css
 vars.outStatus.ToLower()=="full match"
 ```
 
-You can test various expected inputs right in the expression editor. Set **Failed Match** as the default path.
-|30|
-![Process debug run showing correct gateway routing](configure-agent.images/24-gateway-routing.png){ .screenshot }
-]]]
+![Process debug run showing correct gateway routing](configure-agent.images/22-exclusive-gateway.png){ .screenshot }
 
-Click **Debug** and confirm the gateway routes correctly based on the agent's output. This time we want to see execution of the Agent and how Agent's output changes the direction of the execution flow from the default path.
+You can test various expected inputs right in the expression editor. Don't forget to set **Failed Match** as the default path!
+
+Process is ready for testing - click on that Debug button again! 
+
+![Process debug ](configure-agent.images/23-test-run.png){ .screenshot }
+
+!!! tip "Validate that the gateway routes correctly based on the agent's output" 
+    This time we want to see execution of the Agent and how Agent's output changes the direction of the execution flow from the default path.
+
+![Process debug ](configure-agent.images/24-execution-audit.png){ .screenshot }
 
 Your agent is ready. However, in most cases you will need to come back multiple times and improve the prompt in order for it to be more flexible — this way users need to perform less manual validation and it will work more reliably.
-
-[← Configure a Robot](configure-robot.md) | [Next: Configure Human Validation →](configure-human-validation.md)
