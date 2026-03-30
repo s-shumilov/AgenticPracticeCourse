@@ -12,13 +12,13 @@
         <meta name="author" content="Sergey Shumilov">
       
       
-        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/create-bpmn/">
+        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/2-configure-robot/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../1-create-bpmn/">
       
       
-        <link rel="next" href="../configure-robot/">
+        <link rel="next" href="../3-configure-agent/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>1. Create BPMN Process - Agentic Automation Workshop</title>
+        <title>2. Configure a Robot - Agentic Automation Workshop</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#modeling-business-processes-using-bpmn-canvas" class="md-skip">
+        <a href="#automating-tasks-using-robots" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Create BPMN Process
+              2. Configure a Robot
             
           </span>
         </div>
@@ -231,7 +231,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../0-index/" class="md-tabs__link">
           
   
   
@@ -530,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../0-index/" class="md-nav__link">
         
   
   
@@ -538,6 +538,34 @@
     
   
     Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-create-bpmn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Create BPMN Process
   
 
     
@@ -574,7 +602,7 @@
   <span class="md-ellipsis">
     
   
-    1. Create BPMN Process
+    2. Configure a Robot
   
 
     
@@ -592,7 +620,7 @@
   <span class="md-ellipsis">
     
   
-    1. Create BPMN Process
+    2. Configure a Robot
   
 
     
@@ -629,22 +657,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-2-way-matching-process" class="md-nav__link">
+  <a href="#about-the-robot-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The 2-Way Matching Process
+        About the Robot Process
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="The 2-Way Matching Process">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#matching-variants" class="md-nav__link">
+  <a href="#1-create-the-agentic-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Matching Variants
+        1. Create the Agentic Process
       
     </span>
   </a>
@@ -652,10 +691,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#what-youll-build" class="md-nav__link">
+  <a href="#2-configure-the-robot-task" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What You'll Build
+        2. Configure the robot task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test-the-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Test the process
       
     </span>
   </a>
@@ -664,17 +714,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-the-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build the diagram
-      
-    </span>
-  </a>
   
 </li>
       
@@ -694,35 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-robot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    2. Configure a Robot
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure-agent/" class="md-nav__link">
+      <a href="../3-configure-agent/" class="md-nav__link">
         
   
   
@@ -750,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-human-validation/" class="md-nav__link">
+      <a href="../4-configure-human-validation/" class="md-nav__link">
         
   
   
@@ -778,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-api/" class="md-nav__link">
+      <a href="../5-configure-api/" class="md-nav__link">
         
   
   
@@ -878,93 +889,146 @@
 
 
 
-<h1 id="modeling-business-processes-using-bpmn-canvas">Modeling Business Processes using BPMN canvas<a class="headerlink" href="#modeling-business-processes-using-bpmn-canvas" title="Permanent link">&para;</a></h1>
+<h1 id="automating-tasks-using-robots">Automating Tasks using Robots<a class="headerlink" href="#automating-tasks-using-robots" title="Permanent link">&para;</a></h1>
 <div class="admonition tip">
-<p class="admonition-title">Let's start</p>
-<p><strong>1. Review the business process that we will implement</strong></p>
-<p><strong>2. Prepare a BPMN diagram reflecting process steps</strong></p>
+<p class="admonition-title">Here is our plan for this lesson:</p>
+<ol>
+<li>
+<p>Create a <strong>Maestro</strong> agentic process in <strong>Studio Web</strong> and import your BPMN diagram</p>
+</li>
+<li>
+<p>Connect the RPA robotic task to the <strong>RetrieveInvoiceDocument</strong> process</p>
+</li>
+<li>
+<p>Run a debug session to verify the robot's output</p>
+</li>
+<li>
+<p>Learn how process inputs and outputs work</p>
+</li>
+</ol>
 </div>
 <h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>In this step, you'll design the process flow diagram for the invoice matching automation. You'll review the business process, build it in the UiPath BPMN designer, and export the file for import into Maestro.</p>
-<h2 id="the-2-way-matching-process">The 2-Way Matching Process<a class="headerlink" href="#the-2-way-matching-process" title="Permanent link">&para;</a></h2>
-<p>2-way matching is one of the most common processes in finance — validating a supplier invoice against the original Purchase Order.</p>
-<p>Here are the common steps:</p>
-<ol>
-<li><strong>Purchase Order creation</strong> — the purchasing department creates a formal PO with item descriptions, quantities, unit prices, and agreed payment terms.</li>
-<li><strong>Invoice receipt and data entry</strong> — after the vendor delivers goods or services, they submit an invoice. The Accounts Payable team receives it and enters the data into the accounting system, often via automated extraction (OCR + IXP).</li>
-<li><strong>Document validation</strong> — the AP team retrieves the original PO and compares it against the invoice, checking for consistency in key fields: PO number, total amount, price, and line items.<ul>
-<li>Companies often set tolerance levels (e.g., a 5% price variance) to determine if minor differences are acceptable. If within tolerance, the invoice moves to approval; otherwise, it is flagged.</li>
-<li>A single PO may be covered by multiple invoices (partial delivery).</li>
-</ul>
-</li>
-<li><strong>Approval or exception handling</strong> — a matching invoice is approved for payment. If a discrepancy exists, the invoice is placed on hold and sent for investigation.</li>
-<li><strong>Payment processing and documentation</strong> — the approved invoice is scheduled for payment. All records are stored together for audit purposes.</li>
-</ol>
-<h3 id="matching-variants">Matching Variants<a class="headerlink" href="#matching-variants" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Variant</th>
-<th>Documents compared</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>2-way</strong></td>
-<td>Invoice + Purchase Order</td>
-</tr>
-<tr>
-<td><strong>3-way</strong></td>
-<td>Invoice + PO + Goods Receipt Note</td>
-</tr>
-<tr>
-<td><strong>4-way</strong></td>
-<td>Invoice + PO + Goods Receipt Note + Inspection Report</td>
-</tr>
-</tbody>
-</table>
-<p>Every company has customizations depending on their ERP and industry. This exercise focuses on 2-way matching.</p>
-<h3 id="what-youll-build">What You'll Build<a class="headerlink" href="#what-youll-build" title="Permanent link">&para;</a></h3>
-<p>For this exercise, focus on steps 2–4. The simplified process:</p>
-<ol>
-<li>Supplier sends an invoice containing:<ul>
-<li><strong>Header</strong> (company name, addresses, dates, Invoice ID, PO ID, Company registration ID, etc - the usual fields).</li>
-<li><strong>Line items</strong> in a table (Product, Quantity, Price)</li>
-<li><strong>Footer</strong> (Subtotals, Totals, Tax information)</li>
-</ul>
-</li>
-<li><strong>Invoice data is compared</strong> against the linked Purchase Order. Possible outcomes:<ul>
-<li><strong>Full match:</strong> names, quantities, and prices match across all line items, company details, totals, and tax information align.</li>
-<li><strong>Failed match:</strong> discrepancies found: wrong company entity, missing line items, unmatched descriptions, or nothing in common at all.</li>
-</ul>
-</li>
-<li><strong>If the invoice and PO match</strong> (or if a human reviewed and approved it): invoice details are updated in <strong>Data Fabric</strong> and sent for payment.</li>
-<li><strong>If they don't match</strong> — a validation task is created in <strong>Action Center</strong> for the Accounts Payable team to review and then approve or reject.</li>
-<li><strong>If rejected</strong> — an email is generated and sent to the supplier with reasons and a request to fix and resubmit the invoice. The resubmitted invoice is processed following the same steps.</li>
-</ol>
-<h2 id="build-the-diagram">Build the diagram<a class="headerlink" href="#build-the-diagram" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Open <strong><a href="https://bpmn.uipath.com/">bpmn.uipath.com</a></strong> in your browser.</p>
-</li>
-<li>
-<p>Build a BPMN diagram based on the process description above. It should look similar to this:</p>
-<p><img alt="BPMN diagram for IXP invoice matching process" class="screenshot" src="../create-bpmn.images/1-bpmn-diagram.png" /></p>
-</li>
-<li>
-<p>Export the diagram as a <code>.bpmn</code> file. You'll import it into Maestro in the next step. Alternatively, download and use this <strong><a href="../dependencies/2-Way%20Matching%20Process.bpmn">sample BPMN file</a></strong>.</p>
-</li>
-</ol>
+<p>Create a Maestro Agentic Process, import your BPMN diagram, and connect the first task to the <strong>RetrieveInvoiceDocument</strong> RPA process. The robot simulates retrieving an invoice PDF and outputs the file name stored in a Storage Bucket. The agent in the next step will extract structured data from that PDF using IXP.</p>
+<h2 id="about-the-robot-process">About the Robot Process<a class="headerlink" href="#about-the-robot-process" title="Permanent link">&para;</a></h2>
+<p>In this simulated scenario, the company processes hundreds of invoices per day. Data is stored in ERP and Accounts Payable systems that don't always have APIs or direct database access. RPA automation using UI interaction is often the only way to extract that data, and this is where UiPath shines.</p>
+<p>There's a queue of invoices waiting to be processed, and an external transaction handling mechanism that lets the automation pick up the next one. The robot retrieves the invoice, extracts data from the PDF, then finds and retrieves the original Purchase Order sent to the supplier. It outputs details of both documents in JSON format for the agent to process.</p>
+<p>The <strong>RetrieveInvoiceDocument</strong> process simulates this retrieval and outputs a sample invoice as a PDF file, along with the file location in Orchestrator's Storage Bucket. The process has already been configured in Orchestrator in the <strong>2-Way Matching IXP</strong> folder — you will not need to write it.</p>
+<p>Get familiar with it before configuring it in Studio Web — open the <strong>2-Way Matching IXP</strong> folder in Orchestrator and give it a run to explore its inputs and outputs.</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
+<h3 id="1-create-the-agentic-process">1. Create the Agentic Process<a class="headerlink" href="#1-create-the-agentic-process" title="Permanent link">&para;</a></h3>
+<p>In <a href="https://cloud.uipath.com/tpenlabs/studio_/projects"><strong>Studio Web</strong></a>, make sure you are building in the right Tenant (<strong>AgenticPractice</strong>), click <strong>Create New</strong> and select <strong>Agentic Process</strong>. This will create a new project for our Agentic Orchestration workflow that will perform Invoice and PO matching:</p>
+<p><img alt="New Agentic Process in Studio Web" class="screenshot" src="../configure-robot.images/1-new-agentic-process.png" /></p>
+<div class="img-cols img-cols-50">
+<div>
+<p>Now let's import our BPMN diagram.</p>
+<p>Open <strong>Project Explorer</strong>, right-click on the Agentic Process, and select <strong>Import BPMN</strong>.</p>
+<p>Select the <code>.bpmn</code> file you exported in the previous step or use this <strong><a href="../dependencies/2-Way%20Matching%20Process.bpmn">sample BPMN file</a></strong>. The diagram will be added to your project.
+  </p>
+</div>
+<div>
+<p><img alt="BPMN diagram imported into Studio Web" class="screenshot" src="../configure-robot.images/2-import-bpmn.png" />
+  </p>
+</div>
+</div>
 <div class="img-cols img-cols-30">
 <div>
-<p><img alt="Wise robot" class="screenshot" src="../create-bpmn.images/2-wise-robot.png" />
+<p><img alt="Wise Robot" class="screenshot" src="../configure-robot.images/3-wise-robot.png" />
   </p>
 </div>
 <div>
-<p>In later steps, you'll connect each task in this diagram to UiPath platform components. When the process runs, Orchestrator will trigger robotic and agentic jobs — or route tasks to humans. Let's add some action into this diagram by <strong><a href="../configure-robot/">adding a Robot</a></strong>!
+<blockquote>
+<p><strong><em>The art of keeping your projects organized is rooted in habits — and habits are nurtured through consistent practice.</em></strong></p>
+</blockquote>
+<div align="right"><i>
+Generated by a wise ancient LLM
+</i></div>
+</div>
+</div>
+<div class="img-cols img-cols-70">
+<div>
+<p>So, don't forget to reinforce your good habits and clean up your project:</p>
+<ul>
+<li>
+<p>delete the automatically generated empty process ("Process.bpmn")</p>
+</li>
+<li>
+<p>rename your solution and process into <strong>2-Way Matching Solution</strong> and <strong>2-Way Matching Process</strong>
+  </p>
+</li>
+</ul>
+</div>
+<div>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2-Way Matching Solution
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>2-Way Matching Process
+</code></pre></div>
   </p>
 </div>
 </div>
+<hr />
+<p>Unlike static BPMN tools, Maestro allows modeling our diagram, which means you can execute it by following connections and decisions.</p>
+<p>Try to run it by clicking "<strong>Debug</strong>" button in the upper left corner, and then understand why it went the way it went. It should look like this:</p>
+<p><img alt="Debug run on the imported BPMN diagram" class="screenshot" src="../configure-robot.images/4-debug-imported-bpmn.png" /></p>
+<h3 id="2-configure-the-robot-task">2. Configure the robot task<a class="headerlink" href="#2-configure-the-robot-task" title="Permanent link">&para;</a></h3>
+<p>In our scenario, company processes hundreds of Invoices per day, ranging from Office Supplies and Computer Equipment. Data is stored in ERP and Accounts Payable or billing systems that unfortunately not always have APIs or database access, and therefore <strong>RPA automation</strong> using UI interaction is the only way to extract that data.</p>
+<p>Let's assume that there is a queue of Invoices for processing and an external transaction handling mechanism which allows to wait and extract the next Invoice for processing. Automation retrieves Invoice, extracts data from PDF, then finds and retrieves associated original Purchase Order that was sent to Supplier originally. It outputs details of both documents in JSON format for our Agentic Automation to process.</p>
+<div class="img-cols img-cols-70">
+<div>
+<p><img alt="RetrieveInvoiceDocument process in Orchestrator" class="screenshot" src="../configure-robot.images/5-start-wait-rpa.png" />
+  </p>
+</div>
+<div>
+<p>RPA Process called "<strong>RetrieveInvoiceDocument</strong>" will simulate retrieving data and output sample Invoice as a PDF File. It will also point to file name in Storage Bucket.
+  </p>
+</div>
+</div>
+<hr />
+<div class="img-cols img-cols-30">
+<div>
+<p>Here is a sample invoice document that you might get from the <strong>RetrieveInvoiceDocument</strong> automation. Quite standard.
+  </p>
+</div>
+<div>
+<p><img alt="Sample invoice PDF from RetrieveInvoiceDocument" class="screenshot" src="../configure-robot.images/6-invoice-sample.png" />
+  </p>
+</div>
+</div>
+<hr />
+<p>The process has already been configured in Orchestrator in the <strong>2-Way Matching IXP</strong> folder. Get familiar by giving it a run and explore its inputs and outputs:</p>
+<p><img alt="RetrieveInvoiceDocument process run in Orchestrator" class="screenshot" src="../configure-robot.images/7-process-run.png" /></p>
+<p>Once you have validated that the process has everything it needs, go back to <strong>Studio Web</strong> and update your task:</p>
+<ul>
+<li>Open the properties panel by clicking on the task.</li>
+<li>Select <strong>Start and wait for RPA workflow</strong> as the action type.</li>
+</ul>
+<p><img alt="Start and wait for RPA workflow selected in task properties" class="screenshot" src="../configure-robot.images/8-configure-rpa.png" /></p>
+<div class="img-cols img-cols-70">
+<div>
+<p>In the task properties, search for <strong>RetrieveInvoiceDocument</strong> from the <strong>2-Way Matching IXP</strong> folder and select it.
+  </p>
+</div>
+<div>
+<p><img alt="RetrieveInvoiceDocument selected from 2-Way Matching IXP folder" class="screenshot" src="../configure-robot.images/8-configure-rpa-process.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-70">
+<div>
+<p>Maestro will load the inputs and outputs for this RPA automation right away.</p>
+<ul>
+<li>Don't forget to set a value for <strong>in_FailureProbability</strong> — this is the probability, in percent, that the invoice won't match the PO. A value of <strong>90</strong> works well, so you can go through the validation path often while testing. You can change it any time before publishing the final version.
+  </li>
+</ul>
+</div>
+<div>
+<p><img alt="Input and output arguments loaded for RetrieveInvoiceDocument" class="screenshot" src="../configure-robot.images/9-configure-rpa-arguments.png" />
+  </p>
+</div>
+</div>
+<h3 id="3-test-the-process">3. Test the process<a class="headerlink" href="#3-test-the-process" title="Permanent link">&para;</a></h3>
+<p>Next, try launching the Maestro Orchestration Process from Studio Web by clicking the "<strong>Debug</strong>" button. Observe provisioning and execution, then validate that the task generates correct output. At this step we don't need to worry about configuring any input/output parameters — variables will be automatically created for subsequent steps.</p>
+<p><img alt="Debug mode launch" class="screenshot" src="../configure-robot.images/10-run-process.png" /></p>
+<p>Have a look at the execution details: if you see a file name in outputs, you have completed this lesson and it's time to move to the <strong><a href="../3-configure-agent/">next one</a></strong>.</p>
 
 
 
@@ -1002,7 +1066,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+          <a href="../1-create-bpmn/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 1. Create BPMN Process">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1012,20 +1076,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Overview
+                1. Create BPMN Process
               </div>
             </div>
           </a>
         
         
           
-          <a href="../configure-robot/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. Configure a Robot">
+          <a href="../3-configure-agent/" class="md-footer__link md-footer__link--next" aria-label="Next: 3. Configure an Agent">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                2. Configure a Robot
+                3. Configure an Agent
               </div>
             </div>
             <div class="md-footer__button md-icon">

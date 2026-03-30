@@ -12,13 +12,13 @@
         <meta name="author" content="Sergey Shumilov">
       
       
-        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/configure-api/">
+        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/0-index/">
       
       
-        <link rel="prev" href="../configure-human-validation/">
+        <link rel="prev" href="../../categorizing-incidents/tools-and-escalations/">
       
       
-        <link rel="next" href="../you-did-it/">
+        <link rel="next" href="../1-create-bpmn/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>5. Configure API Integration - Agentic Automation Workshop</title>
+        <title>Overview - Agentic Automation Workshop</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#talking-to-external-services" class="md-skip">
+        <a href="#invoice-matching-with-ixp" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5. Configure API Integration
+              Overview
             
           </span>
         </div>
@@ -231,7 +231,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -527,10 +527,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -546,6 +555,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -558,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create-bpmn/" class="md-nav__link">
+      <a href="../1-create-bpmn/" class="md-nav__link">
         
   
   
@@ -586,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-robot/" class="md-nav__link">
+      <a href="../2-configure-robot/" class="md-nav__link">
         
   
   
@@ -614,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-agent/" class="md-nav__link">
+      <a href="../3-configure-agent/" class="md-nav__link">
         
   
   
@@ -642,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-human-validation/" class="md-nav__link">
+      <a href="../4-configure-human-validation/" class="md-nav__link">
         
   
   
@@ -667,37 +677,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    5. Configure API Integration
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../5-configure-api/" class="md-nav__link">
         
   
   
@@ -713,98 +696,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Goal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#integration-service-and-data-fabric" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Integration Service and Data Fabric
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#part-1-configure-the-rejection-email" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Part 1: Configure the rejection email
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#part-2-store-approved-invoice-data-in-data-fabric" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Part 2: Store approved invoice data in Data Fabric
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#part-3-test-both-scenarios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Part 3: Test both scenarios
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -889,97 +780,45 @@
 
 
 
-<h1 id="talking-to-external-services">Talking to external services<a class="headerlink" href="#talking-to-external-services" title="Permanent link">&para;</a></h1>
+<h1 id="invoice-matching-with-ixp">Invoice Matching with IXP<a class="headerlink" href="#invoice-matching-with-ixp" title="Permanent link">&para;</a></h1>
+<hr />
+<p><strong>UiPath Maestro</strong> helps transform workflow designs into scalable, production-ready solutions and enables agentic orchestration — coordinating long-running enterprise processes between humans, robots, and AI agents across different systems of record and systems of engagement. </p>
+<p>In addition to that, this exercise will use <strong>IXP</strong> (<strong>I</strong>ntelligent e<strong>X</strong>traction &amp; <strong>P</strong>rocessing) for invoice data extraction from PDF documents. </p>
+<p>Here is the plan:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Step</th>
+<th style="text-align: left;">Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><a href="../1-create-bpmn/"><strong>Create BPMN Process</strong></a></td>
+<td style="text-align: left;">Design the end-to-end workflow for the process</td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../2-configure-robot/"><strong>Configure a Robot</strong></a></td>
+<td style="text-align: left;">RPA job to retrieve the invoice PDF document</td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../3-configure-agent/"><strong>Configure an Agent</strong></a></td>
+<td style="text-align: left;">Extract data from Invoice using IXP, look up the Purchase Order, Perform Matching and help making decision</td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../4-configure-human-validation/"><strong>Configure Human Validation</strong></a></td>
+<td style="text-align: left;">Customized Action App designed to help Humans handling exceptions in Action Center</td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../5-configure-api/"><strong>Configure API Integration</strong></a></td>
+<td style="text-align: left;">Send notification emails and store approved invoices for further processing</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition tip">
-<p class="admonition-title">Here is our plan for this lesson:</p>
-<ul>
-<li>Send an email to the Supplier with the rejection reason and a request to fix it. Use the email draft from the previous steps.</li>
-<li>Send all Approved Invoices to the Data Fabric database so that the finance team can process payments via their App.</li>
-</ul>
+<p class="admonition-title">Training Environment</p>
+<p>Log in at <strong><a href="https://cloud.uipath.com/tpenlabs">cloud.uipath.com/tpenlabs</a></strong> and remember using tenant <strong>AgenticPractice</strong> for this exercise.</p>
 </div>
-<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>Add the final two tasks to the workflow: send a rejection email to the supplier when an invoice is rejected, and store approved invoice data in <strong>Data Fabric</strong> for payment processing. Both use <strong>Integration Service</strong> connectors already configured in your tenant.</p>
-<p>Validation Form helps to make sure the post-processing is executed confidently based on data that has been verified. Let's complete the process!</p>
-<h2 id="integration-service-and-data-fabric">Integration Service and Data Fabric<a class="headerlink" href="#integration-service-and-data-fabric" title="Permanent link">&para;</a></h2>
-<p>UiPath <strong>Integration Service</strong> is the fastest and most convenient way to automate API-enabled applications. It handles authorization and authentication, centralizing API connection management and enabling faster SaaS platform integration.</p>
-<p>Two connections are available in this tenant:</p>
-<ul>
-<li><strong>Gmail</strong> — a shared mailbox for sending emails</li>
-<li><strong>Data Fabric</strong> — shared data storage for tables, files, and other structured data</li>
-</ul>
-<p>Platform administrators have prepared these connections for automation use and manage security and access restrictions. You don't need to configure authentication.</p>
-<div class="admonition note">
-<p class="admonition-title">Tenant check</p>
-<p>Make sure you're using the correct tenant. Contact your trainer if there are issues with connections.</p>
-</div>
-<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<h3 id="part-1-configure-the-rejection-email">Part 1: Configure the rejection email<a class="headerlink" href="#part-1-configure-the-rejection-email" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>In your <strong>Maestro Agentic Process</strong>, select the task on the <strong>Reject</strong> path.</p>
-</li>
-<li>
-<p>Set the action type to <strong>Execute Connector Activity</strong>.</p>
-<p><img alt="Execute Connector Activity selected" class="screenshot" src="../configure-api.images/1-connector-activity.png" /></p>
-</li>
-<li>
-<p>Select the <strong>Gmail Connector</strong> and configure the Shared Gmail Connection.</p>
-<p><img alt="Gmail Connector and shared connection selected" class="screenshot" src="../configure-api.images/2-gmail-connector.png" /></p>
-</li>
-</ol>
-<div class="img-cols img-cols-50">
-<div>
-<p>Configure the <strong>Send Email</strong> activity:</p>
-<ul>
-<li><strong>To:</strong> send it to yourself or a colleague.</li>
-<li><strong>Subject:</strong> generate a suitable subject.</li>
-<li><strong>Body:</strong> select <code>out_SuggestedResponse</code> — the HTML rejection email drafted by the agent and reviewed during human validation.
-  </li>
-</ul>
-</div>
-<div>
-<p><img alt="Email configured with body from out_SuggestedResponse" class="screenshot" src="../configure-api.images/3-email-configured.png" />
-  </p>
-</div>
-</div>
-<ol>
-<li>Save the task.</li>
-</ol>
-<h3 id="part-2-store-approved-invoice-data-in-data-fabric">Part 2: Store approved invoice data in Data Fabric<a class="headerlink" href="#part-2-store-approved-invoice-data-in-data-fabric" title="Permanent link">&para;</a></h3>
-<p>For approved invoices, pass the invoice data to the payments team. They use their own UiPath Automation connected to Data Fabric, so push data there.</p>
-<ol>
-<li>
-<p>Select the task on the <strong>Approve</strong> path.</p>
-</li>
-<li>
-<p>Set the action type to <strong>Execute Connector Activity</strong>.</p>
-<p><img alt="Execute Connector Activity on Approve path" class="screenshot" src="../configure-api.images/4-approve-connector.png" /></p>
-</li>
-</ol>
-<div class="img-cols img-cols-30">
-<div>
-<p>Maestro/Agentic Orchestration works with Data Service via Integration Service, so select the <strong>Data Fabric connector</strong> and configure it with the specified parameters.
-  </p>
-</div>
-<div>
-<p><img alt="Data Fabric connector configured" class="screenshot" src="../configure-api.images/5-data-fabric-connector.png" />
-  </p>
-</div>
-</div>
-<h3 id="part-3-test-both-scenarios">Part 3: Test both scenarios<a class="headerlink" href="#part-3-test-both-scenarios" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>Test both scenarios. Remember — the initial RPA job has an input parameter controlling Invoice mismatch probability with Purchase Orders.</p>
-<p>Run the process several times. After a few runs:
-- Check <strong>Data Fabric</strong> — approved invoices accumulate as records.
-- Check the inbox — HTML-formatted rejection emails arrive for rejected invoices.</p>
-<p><img alt="Data Fabric records from multiple process runs" class="screenshot" src="../configure-api.images/6-data-fabric-records.png" /></p>
-</li>
-</ol>
-<p>After several runs, Data Fabric accumulates data and rejection emails arrive in your mailbox as nicely formatted HTML messages.</p>
-<p>Everything works as planned!</p>
-<p>The process is complete. It retrieves invoice PDFs, extracts and validates data using IXP, routes exceptions to human review, sends rejection emails, and stores approved records — all orchestrated by Maestro.</p>
-<p><a href="../configure-human-validation/">← Configure Human Validation</a> | <a href="../you-did-it/">Next: You did it! →</a></p>
 
 
 
@@ -1017,7 +856,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../configure-human-validation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4. Configure Human Validation">
+          <a href="../../categorizing-incidents/tools-and-escalations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tools and Escalations">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1027,20 +866,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                4. Configure Human Validation
+                Tools and Escalations
               </div>
             </div>
           </a>
         
         
           
-          <a href="../you-did-it/" class="md-footer__link md-footer__link--next" aria-label="Next: You did it!">
+          <a href="../1-create-bpmn/" class="md-footer__link md-footer__link--next" aria-label="Next: 1. Create BPMN Process">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                You did it!
+                1. Create BPMN Process
               </div>
             </div>
             <div class="md-footer__button md-icon">

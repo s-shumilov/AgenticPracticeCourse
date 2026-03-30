@@ -12,13 +12,13 @@
         <meta name="author" content="Sergey Shumilov">
       
       
-        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/configure-human-validation/">
+        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/invoice-matching-ixp/4-configure-human-validation/">
       
       
-        <link rel="prev" href="../configure-agent/">
+        <link rel="prev" href="../3-configure-agent/">
       
       
-        <link rel="next" href="../configure-api/">
+        <link rel="next" href="../5-configure-api/">
       
       
         
@@ -231,7 +231,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../0-index/" class="md-tabs__link">
           
   
   
@@ -530,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../0-index/" class="md-nav__link">
         
   
   
@@ -558,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create-bpmn/" class="md-nav__link">
+      <a href="../1-create-bpmn/" class="md-nav__link">
         
   
   
@@ -586,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-robot/" class="md-nav__link">
+      <a href="../2-configure-robot/" class="md-nav__link">
         
   
   
@@ -614,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-agent/" class="md-nav__link">
+      <a href="../3-configure-agent/" class="md-nav__link">
         
   
   
@@ -736,10 +736,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#part-1-import-the-validation-app" class="md-nav__link">
+  <a href="#1-import-the-validation-app" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 1: Import the validation app
+        1. Import the validation app
       
     </span>
   </a>
@@ -747,10 +747,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-2-configure-the-human-task-in-maestro" class="md-nav__link">
+  <a href="#2-configure-the-human-task-in-maestro" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 2: Configure the human task in Maestro
+        2. Configure the human task in Maestro
       
     </span>
   </a>
@@ -758,10 +758,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-3-configure-the-gateway-decision" class="md-nav__link">
+  <a href="#3-configure-the-gateway-decision" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 3: Configure the gateway decision
+        3. Configure the gateway decision
       
     </span>
   </a>
@@ -769,10 +769,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-4-test-the-human-validation-flow" class="md-nav__link">
+  <a href="#4-test-the-human-validation-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 4: Test the human validation flow
+        4. Test the human validation flow
       
     </span>
   </a>
@@ -800,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure-api/" class="md-nav__link">
+      <a href="../5-configure-api/" class="md-nav__link">
         
   
   
@@ -905,7 +905,7 @@
 <p class="admonition-title">Here is our plan for this lesson:</p>
 <ol>
 <li>
-<p>Add a validation Action App to our project.</p>
+<p>Import validation Action App into our project.</p>
 </li>
 <li>
 <p>Configure the process flow so that if the Agent fails to match Invoice and PO, an Action Center Task is created allowing a human to make a decision.</p>
@@ -921,155 +921,141 @@
 <h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <p>Add a human validation step on the <strong>Failed Match</strong> path. When the agent flags a mismatch, a reviewer in <strong>Action Center</strong> sees a summary with both documents and chooses to approve or reject the invoice. The workflow resumes based on their decision.</p>
 <h2 id="humans-in-the-loop">Humans in the Loop<a class="headerlink" href="#humans-in-the-loop" title="Permanent link">&para;</a></h2>
-<p>In many cases where Agent can not determine the exact course of action, human involvement is required. Humans process tasks in <strong>Action Center</strong> using conveniently summarized inputs from Robots and Agents:</p>
+<p>In many cases where the Agent cannot determine the exact course of action, human involvement is required. Humans process tasks in <strong>Action Center</strong> using conveniently summarized inputs from Robots and Agents:</p>
 <ul>
-<li>All inputs required to make a decision should be presented on one screen — ideally we don't want business users to open applications or go back and review execution flow.</li>
-<li>The agent's job is to prepare all inputs in the right format, so that when the time comes to ask for user inputs, it's ready.</li>
+<li>All inputs required to make a decision should be presented on one screen — ideally we don't want business users to open applications or go back and review the execution flow.</li>
+<li>The agent's job is to prepare all inputs in the right format, so that when the time comes to ask for user inputs, the data is ready.</li>
 <li>Once the decision is made, the process execution continues to the next steps.</li>
 </ul>
+<p><img alt="Human validation step architecture" class="screenshot" src="../configure-human-validation.images/1-validation-arguments.png" width="700" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note on approvals</p>
 <p>In real life, it is absolutely not ok to approve an invoice and send it for payment if the Purchase Order was for something different — in some countries it's a crime. But for this practice, assume that humans can do whatever they want when it comes to this decision, with no consequences.</p>
 </div>
-<p>Let's plan the Action's structure. In short, we need a nice frontend for the user where the problem is presented along with the necessary information to make a decision:</p>
+<p>To build a nice validation interface, we need a frontend that presents the problem along with the necessary information to make a decision:</p>
 <ul>
-<li>Our problem is that the invoice and Purchase Order don't match, so both documents should be presented — ideally with discrepancies highlighted in red.</li>
-<li>It's a good idea to describe the problem to the human with a couple of sentences, just in case.</li>
-<li>If the decision is to reject the Invoice and send an email to the Supplier — we can help the user with an email draft so that even more time can be saved. And we already have it generated by the Agent!</li>
+<li>The invoice and Purchase Order should be presented side by side — ideally with discrepancies highlighted in red.</li>
+<li>The problem should be described to the human in a couple of sentences.</li>
+<li>If the decision is to reject the Invoice and send an email to the Supplier, a draft email helps save time. We already have it generated by the Agent!</li>
 </ul>
-<p>Do you think this kind of form will be helpful for a business user to speed up processing time? Any opportunity to improve it?</p>
-<p>Let's build it!!! Well... it will take a lot of time, so... maybe let's just re-use an existing App template instead. 😅</p>
+<p>Instead of building this from scratch, we'll reuse an existing Action App template.</p>
+<p><img alt="Validation app interface showing invoice and PO comparison" class="screenshot" src="../configure-human-validation.images/2-validation-app-draft-W.png" width="900" /></p>
 <h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<h3 id="part-1-import-the-validation-app">Part 1: Import the validation app<a class="headerlink" href="#part-1-import-the-validation-app" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>Import the <strong>2WM Validation App IXP Template</strong> from the shared templates into your solution. Find it and click <strong>Add</strong>.</p>
-<p><img alt="2WM Validation App IXP Template selected" class="screenshot" src="../configure-human-validation.images/1-validation-app-template.png" /></p>
-</li>
-<li>
-<p>After the app appears in your solution, review its structure — this is important to understand key design considerations:</p>
-</li>
-<li><strong>UI elements</strong> — how the validation task appears to the reviewer.</li>
-<li><strong>App Actions and Action Schema</strong> — the possible outcomes of the reviewer's decision.</li>
-<li>
-<p><strong>App Inputs and Outputs</strong> — where data comes from and what comes out.</p>
-<p><img alt="2WM Validation App IXP interface" class="screenshot" src="../configure-human-validation.images/2-validation-app-interface.png" /></p>
-</li>
-</ol>
-<h3 id="part-2-configure-the-human-task-in-maestro">Part 2: Configure the human task in Maestro<a class="headerlink" href="#part-2-configure-the-human-task-in-maestro" title="Permanent link">&para;</a></h3>
-<p>Let's open the Agentic Process again and configure the validation task as an Action App Task.</p>
-<ol>
-<li>
-<p>In your <strong>Maestro Agentic Process</strong>, select the human task node on the <strong>Failed Match</strong> path.</p>
-</li>
-<li>
-<p>Set the action type to <strong>Action App Task</strong>.</p>
-<p><img alt="Action App Task selected" class="screenshot" src="../configure-human-validation.images/3-action-app-task.png" /></p>
-</li>
-</ol>
-<div class="img-cols img-cols-30">
+<h3 id="1-import-the-validation-app">1. Import the validation app<a class="headerlink" href="#1-import-the-validation-app" title="Permanent link">&para;</a></h3>
+<div class="img-cols img-cols-50">
 <div>
-<p>Select the <strong>2WM Validation App IXP</strong> you imported.</p>
-<p>Customize the task title so it's easy to identify in Action Center later, for example: <strong>Invoice Review Required</strong>.</p>
-<p>In <strong>Advanced Options</strong>, assign the task to yourself. Otherwise you'll need to locate your task among all unassigned tasks in Action Center.
+<p>In your solution, click the <strong>+</strong> icon in the Explorer to add a project, then select <strong>Import existing</strong> to add a new project to the solution. Find and import the validation app template.
   </p>
 </div>
 <div>
-<p><img alt="Task configured with title and assignee" class="screenshot" src="../configure-human-validation.images/4-task-configured.png" />
+<p><img alt="Solution Explorer with import menu" class="screenshot" src="../configure-human-validation.images/3-import-action-app.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-30">
+<div>
+<p>Find the <strong>2WM Validation App IXP Template</strong> in the list, select it, and click <strong>Add</strong>.
+  </p>
+</div>
+<div>
+<p><img alt="Add project dialog with validation template selected" class="screenshot" src="../configure-human-validation.images/4-import-template.png" />
+  </p>
+</div>
+</div>
+<p>After the app appears in your solution, review its structure to understand the design approach. </p>
+<ul>
+<li>
+<p>Structure of the App <strong>UI elements</strong> - this is how validation task appears in from of the user.</p>
+</li>
+<li>
+<p>App Actions and <strong>Action Schema</strong> - this covers possible outcomes of the user decision or action.</p>
+</li>
+<li>
+<p>App <strong>Inputs and Outputs</strong>: where data comes from, where it is used, what comes out.</p>
+</li>
+</ul>
+<p>Open the <strong>MainPage</strong> in the app designer:</p>
+<p><img alt="App designer showing the validation interface layout and components" class="screenshot" src="../configure-human-validation.images/5-app-structure-W.png" width="900" /></p>
+<p>Review the app's <strong>input</strong> and <strong>output</strong> configuration. This shows what data the Agent will send in, and what the reviewer's decision will produce.</p>
+<p><img alt="App configuration showing inputs from Agent and output decisions" class="screenshot" src="../configure-human-validation.images/6-app-arguments-W.png" width="900" /></p>
+<h3 id="2-configure-the-human-task-in-maestro">2. Configure the human task in Maestro<a class="headerlink" href="#2-configure-the-human-task-in-maestro" title="Permanent link">&para;</a></h3>
+<p>Go back to your <strong>Agentic Process</strong> in Maestro and configure the validation task on the <strong>Failed Match</strong> path as an Action App Task.</p>
+<div class="img-cols img-cols-30">
+<div>
+<p>Select the human task node on the <strong>Failed Match</strong> path and set its action type to <strong>Create action app task</strong>. </p>
+<p>Then select the <strong>2WM Validation App IXP</strong> you just imported from the Defined resources list .
+  </p>
+</div>
+<div>
+<p><img alt="Maestro task properties with action app selection" class="screenshot" src="../configure-human-validation.images/7-add-action-task.png" />
   </p>
 </div>
 </div>
 <div class="img-cols img-cols-50">
 <div>
-<p>The App should pick the Agent's outputs as App inputs — just the way we did with the agent. Here you might again see the true value of following naming conventions!</p>
-<table>
-<thead>
-<tr>
-<th>Agent output</th>
-<th>App input</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>out_DocumentsHTML</code></td>
-<td>Comparison display field</td>
-</tr>
-<tr>
-<td><code>out_SuggestedResponse</code></td>
-<td>Suggested rejection email field</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>Customize the task title so it's easy to identify in <strong>Action Center</strong> later — for example: <strong>Invoice Validation (Your Name)</strong>. </p>
+<p>In <strong>Advanced Options</strong>, assign the task to yourself so you don't have to search for it among unassigned tasks.
+  </p>
 </div>
 <div>
-<p><img alt="Agent outputs mapped to app inputs" class="screenshot" src="../configure-human-validation.images/5-input-mapping.png" />
+<p><img alt="Task configuration panel with title and assignee options" class="screenshot" src="../configure-human-validation.images/8-configure-action-task.png" />
   </p>
 </div>
 </div>
-<ol>
-<li>
-<p>Save the task configuration.</p>
-<p><img alt="Completed task configuration" class="screenshot" src="../configure-human-validation.images/6-task-config-complete.png" /></p>
-</li>
-</ol>
-<h3 id="part-3-configure-the-gateway-decision">Part 3: Configure the gateway decision<a class="headerlink" href="#part-3-configure-the-gateway-decision" title="Permanent link">&para;</a></h3>
-<p>One last step in this lesson — let's configure the downstream flow based on the validation decision.</p>
-<ol>
-<li>
-<p>Configure the <strong>Exclusive Gateway</strong> downstream from the human task.</p>
-<p><img alt="Exclusive Gateway configured" class="screenshot" src="../configure-human-validation.images/7-exclusive-gateway.png" /></p>
-</li>
-</ol>
 <div class="img-cols img-cols-30">
 <div>
-<p>Set <strong>Reject</strong> as the default path (note that a real business process might have a different approach).</p>
-<p>In the Expression Editor, pick the <strong>Action</strong> output — which per the app settings can be <code>"Approve"</code> or <code>"Reject"</code>. Configure the <strong>Approve</strong> path condition:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vars.actionOutput == &quot;Approve&quot;
+<p>Map the Agent's outputs to the App's inputs, same way we did with agent.</p>
+<p>In the Inputs section, connect <code>out_DocumentsHTML</code> and <code>out_SuggestedResponse</code> from your Agent to the corresponding app input fields.</p>
+<p>Here you might again see the true value of following naming conventions!
+  </p>
+</div>
+<div>
+<p><img alt="Input mapping showing agent outputs connected to app inputs" class="screenshot" src="../configure-human-validation.images/9-configure-action-arguments.png" />
+  </p>
+</div>
+</div>
+<p>Save the task configuration.</p>
+<h3 id="3-configure-the-gateway-decision">3. Configure the gateway decision<a class="headerlink" href="#3-configure-the-gateway-decision" title="Permanent link">&para;</a></h3>
+<p>Now configure the downstream flow based on the validation decision.</p>
+<p>Select the <strong>Exclusive Gateway</strong> that routes the process after the human task.</p>
+<p><img alt="Gateway properties showing Reject and Approve paths" class="screenshot" src="../configure-human-validation.images/10-configure-gateway.png" width="800" /></p>
+<p>Set <strong>Reject</strong> as the default path, keeping in mind that a real business business process might have different approach. </p>
+<p>For the <strong>Approve</strong> path, click the Expression Editor button to configure the condition.</p>
+<div class="img-cols img-cols-30">
+<div>
+<p>In the Expression editor, insert the Action output variable from the human task.</p>
+<p>Enter the condition for the Approve path:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">vars</span><span class="p">.</span><span class="nc">action</span><span class="o">==</span><span class="s2">&quot;Approve&quot;</span>
 </code></pre></div>
   </p>
 </div>
 <div>
-<p><img alt="Expression Editor with Approve condition" class="screenshot" src="../configure-human-validation.images/8-approve-condition.png" />
+<p><img alt="Expression editor with variable insertion menu" class="screenshot" src="../configure-human-validation.images/11-gateway-variable.png" />
   </p>
 </div>
 </div>
-<h3 id="part-4-test-the-human-validation-flow">Part 4: Test the human validation flow<a class="headerlink" href="#part-4-test-the-human-validation-flow" title="Permanent link">&para;</a></h3>
-<p>Testing time! Now click the Debug button and monitor the execution. In some cases (<code>in_FailureProbability</code>), the Invoice will not match the Purchase Order and will go for validation.</p>
-<ol>
-<li>
-<p>Click <strong>Debug</strong>. With <code>in_FailureProbability</code> set to 90, the invoice will frequently fail to match, triggering the human task.</p>
-<p><img alt="Process debug with human task triggered" class="screenshot" src="../configure-human-validation.images/9-debug-human-task.png" /></p>
-</li>
-<li>
-<p>Processing is suspended and Maestro will wait until a decision is made. Click <strong>Open app task</strong> or find the task in <strong>Action Center</strong>. Review the comparison and click <strong>Approve</strong> or <strong>Reject</strong>.</p>
-<p><img alt="Action Center showing invoice review task" class="screenshot" src="../configure-human-validation.images/10-action-center-task.png" /></p>
-<p>Looks like the Agent did a fine job, even though this invoice should not be rejected. As soon as the task is processed, Maestro continues the execution.</p>
-</li>
-<li>
-<p>Confirm the process resumed and routed correctly after your decision.</p>
-<p><img alt="Process resumed after human decision" class="screenshot" src="../configure-human-validation.images/11-process-resumed.png" /></p>
-</li>
-<li>
-<p>Review the execution trace in Maestro to verify the correct path was taken.</p>
-<p><img alt="Execution trace showing the path taken" class="screenshot" src="../configure-human-validation.images/12-execution-trace.png" /></p>
-</li>
-<li>
-<p>Run a few more tests — try both Approve and Reject — to confirm both paths work.</p>
-<p><img alt="Second test run with different decision outcome" class="screenshot" src="../configure-human-validation.images/13-second-test-run.png" /></p>
-<p><img alt="Process execution summary after multiple test runs" class="screenshot" src="../configure-human-validation.images/14-execution-summary.png" /></p>
-</li>
-<li>
-<p>Review the end-to-end process execution.</p>
-<p><img alt="End-to-end process flow" class="screenshot" src="../configure-human-validation.images/15-end-to-end-flow.gif" /></p>
-</li>
-</ol>
+<div class="img-cols img-cols-30">
+<div>
+<p>This routes the process to the Approve path when the reviewer approves the invoice.
+  </p>
+</div>
+<div>
+<p><img alt="Gateway path condition showing the expression" class="screenshot" src="../configure-human-validation.images/12-gateway-expression.png" />
+  </p>
+</div>
+</div>
+<h3 id="4-test-the-human-validation-flow">4. Test the human validation flow<a class="headerlink" href="#4-test-the-human-validation-flow" title="Permanent link">&para;</a></h3>
+<p>Now test the complete human validation flow. Click <strong>Debug</strong> and monitor the execution. With <code>in_FailureProbability</code> set to a high value (like 90), the invoice will frequently fail to match, triggering the human validation task.</p>
+<p>Click <strong>Debug</strong> to start the process. The execution will pause at the <strong>Manual Review and Validation</strong> task when a mismatch is detected.</p>
+<p><img alt="Maestro execution view showing process paused at the human task" class="screenshot" src="../configure-human-validation.images/13-validation-test-run-W.png" width="900" /></p>
+<p>Open the action task by clicking <strong>Open app task</strong> in the Details panel. Review the side-by-side invoice and PO comparison, and make a decision.</p>
+<p><img alt="Action Center task showing the invoice validation interface" class="screenshot" src="../configure-human-validation.images/14-validation-action-W.png" width="900" /></p>
+<p>Looks like Agent did a fine job. But should this invoice be approved or rejected? Click <strong>Approve and pay</strong> or <strong>Reject</strong>. As soon as you submit your decision, Maestro continues the execution down the appropriate path.</p>
+<p>Review the end-to-end process to confirm the human validation step is correctly integrated and routes based on your decision.</p>
+<p><img alt="Complete process diagram with the human validation step highlighted" class="screenshot" src="../configure-human-validation.images/15-end-to-end-flow-W.gif" width="900" /></p>
+<p>Run a few more tests — try both Approve and Reject — to confirm both paths route correctly.</p>
 <p>Let's agree that the App could use a better design, but all in all — it does the job well enough.</p>
-<p>Feel free to make a couple of additional test runs, and move on to the next lesson. We are almost done!</p>
-<p><a href="../configure-agent/">← Configure an Agent</a> | <a href="../configure-api/">Next: Configure API Integration →</a></p>
+<p>Feel free to make a couple of additional test runs, and move on to the <strong><a href="../5-configure-api/">next lesson</a></strong>. We are almost done!</p>
 
 
 
@@ -1107,7 +1093,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../configure-agent/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Configure an Agent">
+          <a href="../3-configure-agent/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Configure an Agent">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1124,7 +1110,7 @@
         
         
           
-          <a href="../configure-api/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Configure API Integration">
+          <a href="../5-configure-api/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Configure API Integration">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
