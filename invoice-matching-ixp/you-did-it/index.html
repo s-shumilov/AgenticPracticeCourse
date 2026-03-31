@@ -896,7 +896,8 @@
 </div>
 <hr />
 <h2 id="what-you-built">What you built<a class="headerlink" href="#what-you-built" title="Permanent link">&para;</a></h2>
-<p>Your process handles the full invoice lifecycle — from retrieving a PDF to routing the outcome — without any manual steps required for the happy path.</p>
+<p>Everything works as planned! The process is now complete — it retrieves invoice PDFs, extracts and validates data using IXP, routes exceptions to human review, sends rejection emails, and stores approved records for payment processing. All orchestrated by Maestro.</p>
+<p>Using UiPath Platform services has never been so easy!</p>
 <p>Summary:</p>
 <table>
 <thead>
@@ -928,33 +929,42 @@
 <hr />
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <h3 id="1-publish-and-run-your-process-from-maestro-dashboard">1. Publish and run your process from Maestro dashboard<a class="headerlink" href="#1-publish-and-run-your-process-from-maestro-dashboard" title="Permanent link">&para;</a></h3>
-<p>Publish your completed process to your personal workspace, then run it as you would any other UiPath process.</p>
+<p>Your process is now complete. Publish it to your "<strong>Personal Workspace</strong>" and run it like any other UiPath process — it triggers robotic and agentic jobs automatically, in the right sequence, involving humans only when needed.</p>
 <ul>
 <li>Open your solution in <strong>Studio Web</strong></li>
-<li>Publish to your personal workspace</li>
+<li>Publish to your <strong>Personal Workspace</strong> </li>
 <li>Trigger a run from <strong>Orchestrator</strong> or <strong>Maestro</strong></li>
-<li>Watch the execution trace end-to-end</li>
+<li>Watch the execution trace end-to-end from <strong>Maestro</strong> dashboard:</li>
 </ul>
+<p><img alt="Maestro instance management view showing a BPMN process map and two running process instances" class="screenshot" src="../you-did-it.images/maestro-instance-management.png" width="900" /></p>
 <h3 id="2-explore-maestro-analytics">2. Explore Maestro analytics<a class="headerlink" href="#2-explore-maestro-analytics" title="Permanent link">&para;</a></h3>
-<p>After a few runs, <strong>Maestro → Analytics</strong> shows:</p>
+<p>After a few runs, head over to <strong>Maestro</strong> to explore execution details for each transaction. Here is how the analytics view looks:</p>
 <ul>
 <li>Transaction-level execution details</li>
 <li>End-to-end process flow visualization</li>
 <li>Exception and escalation rates</li>
 </ul>
+<p><img alt="Maestro monitoring view with heatmap overlay showing execution counts across the invoice-matching workflow" class="screenshot" src="../you-did-it.images/maestro-monitoring-heatmap.png" width="900" /></p>
 <hr />
 <h2 id="keep-iterating">Keep iterating<a class="headerlink" href="#keep-iterating" title="Permanent link">&para;</a></h2>
-<p><strong>Improve the agent prompt</strong>
-- The current prompt misses some edge cases — similar-but-not-identical line item descriptions, for example.
-- Modify the system prompt and re-test with the same invoices.
-- Measure how the matching decision changes.</p>
-<p><strong>Test the boundaries</strong>
-- Set <code>in_FailureProbability</code> to different values and run multiple times.
-- Deliberately submit an invoice with a missing PO ID and observe the escalation path.</p>
-<p><strong>Expand the process</strong>
-- Add a second document type (e.g. credit notes).
-- Introduce a new escalation path for high-value mismatches.
-- Connect the approval path to an additional downstream system.</p>
+<p><strong>Improve the agent prompt</strong></p>
+<ul>
+<li>The current prompt misses some edge cases — similar-but-not-identical line item descriptions, for example.</li>
+<li>Modify the system prompt and re-test with the same invoices.</li>
+<li>Measure how the matching decision changes.</li>
+</ul>
+<p><strong>Test the boundaries</strong></p>
+<ul>
+<li>Set <code>in_FailureProbability</code> to different values and run multiple times.</li>
+<li>Deliberately submit an invoice with a missing PO ID and observe the escalation path.</li>
+</ul>
+<p><strong>Expand the process</strong></p>
+<ul>
+<li>Add a second document type (e.g. credit notes).</li>
+<li>Introduce a new escalation path for high-value mismatches.</li>
+<li>Connect the approval path to an additional downstream system.</li>
+</ul>
+<p>The skills you practiced here — prompt engineering, agentic orchestration, human-in-the-loop design, API integration — are the building blocks of modern enterprise automation. Keep experimenting. Change the prompts. Break things. Fix them. That's how it sticks.</p>
 <hr />
 <h2 id="learn-more">Learn more<a class="headerlink" href="#learn-more" title="Permanent link">&para;</a></h2>
 <table>
