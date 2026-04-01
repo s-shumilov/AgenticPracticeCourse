@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#categorizing-incidents" class="md-skip">
+        <a href="#categorizing-technical-support-incidents" class="md-skip">
           Skip to content
         </a>
       
@@ -458,82 +458,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#five-phase-learning-path" class="md-nav__link">
+  <a href="#steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Five-Phase Learning Path
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Five-Phase Learning Path">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#phase-1-basic-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 1 — Basic Agent
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phase-2-llm-with-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2 — LLM with Context
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phase-3-evaluations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3 — Evaluations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phase-4-live-system-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 4 — Live System Integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phase-5-tools-and-escalations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 5 — Tools and Escalations
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#platform" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Platform
+        Steps
       
     </span>
   </a>
@@ -911,52 +839,47 @@
 
 
 
-<h1 id="categorizing-incidents">Categorizing Incidents<a class="headerlink" href="#categorizing-incidents" title="Permanent link">&para;</a></h1>
-<p><strong>Build an intelligent ServiceNow incident triage agent</strong></p>
-<hr />
+<h1 id="categorizing-technical-support-incidents">Categorizing Technical Support Incidents<a class="headerlink" href="#categorizing-technical-support-incidents" title="Permanent link">&para;</a></h1>
+<p><strong>Build an intelligent ServiceNow incident triage agent for ticket routing</strong></p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>In this exercise you'll use <strong>UiPath Agent Builder</strong> to create an agent that automatically categorizes and routes ServiceNow incidents. You'll progress through five phases, each adding a new capability layer.</p>
-<h2 id="five-phase-learning-path">Five-Phase Learning Path<a class="headerlink" href="#five-phase-learning-path" title="Permanent link">&para;</a></h2>
-<h3 id="phase-1-basic-agent">Phase 1 — Basic Agent<a class="headerlink" href="#phase-1-basic-agent" title="Permanent link">&para;</a></h3>
-<p>Create a foundational categorization agent using system prompts. The agent analyzes incident descriptions and assigns categories without any external data sources.</p>
-<p><strong>You'll learn:</strong>
-- Agent Builder basics
-- Writing effective system prompts for categorization
-- Testing agent responses</p>
-<hr />
-<h3 id="phase-2-llm-with-context">Phase 2 — LLM with Context<a class="headerlink" href="#phase-2-llm-with-context" title="Permanent link">&para;</a></h3>
-<p><a href="llm-with-context/">Ground your agent</a> in real incident data to eliminate hallucinations. Instead of relying solely on the LLM's general knowledge, you'll provide structured context from your incident database.</p>
-<p><strong>You'll learn:</strong>
-- Data-anchoring techniques
-- Preventing AI-generated assumptions
-- Feeding structured data into prompts</p>
-<hr />
-<h3 id="phase-3-evaluations">Phase 3 — Evaluations<a class="headerlink" href="#phase-3-evaluations" title="Permanent link">&para;</a></h3>
-<p>Deploy an evaluation framework to systematically test your agent's performance across a standardized collection of test cases.</p>
-<p><strong>You'll learn:</strong>
-- Building test case collections
-- Running batch evaluations
-- Measuring and improving categorization accuracy</p>
-<hr />
-<h3 id="phase-4-live-system-integration">Phase 4 — Live System Integration<a class="headerlink" href="#phase-4-live-system-integration" title="Permanent link">&para;</a></h3>
-<p>Connect the agent to ServiceNow's live API — retrieve incident details from real systems and post categorization decisions back.</p>
-<p><strong>You'll learn:</strong>
-- API integration in Agent Builder
-- Reading from and writing to ServiceNow
-- Working with real operational data</p>
-<hr />
-<h3 id="phase-5-tools-and-escalations">Phase 5 — Tools and Escalations<a class="headerlink" href="#phase-5-tools-and-escalations" title="Permanent link">&para;</a></h3>
-<p><a href="tools-and-escalations/">Implement escalation workflows</a> via Action Center. Route complex or ambiguous incidents to human reviewers when automated handling isn't appropriate.</p>
-<p><strong>You'll learn:</strong>
-- Configuring Action Center escalations
-- Designing human-in-the-loop decision points
-- When (and how) to hand off to humans</p>
-<hr />
-<h2 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h2>
-<p>All exercises run in <strong>UiPath Agent Builder</strong>, a low-code environment that lets you create, design, and deploy agents without deep coding experience.</p>
+<p><strong>UiPath Agent Builder</strong> is a vital tool designed to empower users in the development of intelligent automation solutions with minimal coding experience. It facilitates the creation, design, and deployment of agents that can perform various tasks, such as invoking automations, utilizing APIs, and collaborating with other systems seamlessly. </p>
+<p>By offering a low-code environment, Agent Builder democratizes access to automation capabilities, enabling both technical and non-technical users to craft powerful, context-driven agents tailored to their unique operational needs. </p>
+<p>In this exercise you'll use <strong>UiPath Agent Builder</strong> to create an agent that automatically categorizes and routes ServiceNow incidents. You'll build a complete system that analyzes technical incidents, grounds decisions in real data, and routes ambiguous cases to human reviewers.</p>
+<p>The progression looks like this:</p>
+<ul>
+<li>
+<p>First, we will teach agent to categorize incidents based on static descriptions. We will play with sample inputs to better understand LLM interactions, use the <strong>Context Grounding</strong> to finetune the results, and give it a thorough testing using <strong>Evaluations</strong> feature.</p>
+</li>
+<li>
+<p>Once categorization itself is working well - we will "grow agent's hands" by connecting it to <strong>ServiceNow</strong> using <strong>Integration Service</strong> so that it can retrieve incident details and update incident back to ServiceNow based on Agent's analysis. </p>
+</li>
+<li>
+<p>Finally, if Agent is unable to categorize the Incident, it should be able to reach out to <strong>Humans</strong> using <strong>Escalations</strong> capability.</p>
+</li>
+</ul>
+<p>By the end, you'll have a fully functional, production-ready triage agent. Let's get started!</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Step</th>
+<th style="text-align: left;">Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><a href="llm-with-context/"><strong>LLM with Context</strong></a></td>
+<td style="text-align: left;">Ground your agent in real incident data to eliminate hallucinations. Create an agent that analyzes incident descriptions, anchors decisions to structured context, and validates performance with evaluation sets.</td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="tools-and-escalations/"><strong>Tools and Escalations</strong></a></td>
+<td style="text-align: left;">Connect your agent to ServiceNow's live API and implement escalation workflows. Retrieve incident details from real systems, update tickets with categorization decisions, and route ambiguous cases to human reviewers via Action Center.</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition tip">
 <p class="admonition-title">Training Environment</p>
-<p>Log in at <a href="https://cloud.uipath.com/tpenlabs">cloud.uipath.com/tpenlabs</a> using tenant <strong>AgenticPractice</strong>.</p>
+<p>Log in at <strong><a href="https://cloud.uipath.com/tpenlabs">cloud.uipath.com/tpenlabs</a></strong> and remember using tenant <strong>AgenticPractice</strong> for this exercise.</p>
 </div>
 
 

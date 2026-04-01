@@ -548,10 +548,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#part-1-add-servicenow-tools" class="md-nav__link">
+  <a href="#1-add-servicenow-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 1: Add ServiceNow tools
+        1. Add ServiceNow tools
       
     </span>
   </a>
@@ -559,10 +559,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-2-add-escalations" class="md-nav__link">
+  <a href="#2-add-escalations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Part 2: Add escalations
+        2. Add escalations
       
     </span>
   </a>
@@ -899,20 +899,21 @@
 <h2 id="when-to-escalate">When to Escalate<a class="headerlink" href="#when-to-escalate" title="Permanent link">&para;</a></h2>
 <p>Escalation is not a failure — it is a design choice. Use it whenever the agent cannot establish a clear category and subcategory from the incident description. A well-configured escalation path is more valuable than an agent that guesses.</p>
 <h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<h3 id="part-1-add-servicenow-tools">Part 1: Add ServiceNow tools<a class="headerlink" href="#part-1-add-servicenow-tools" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
+<h3 id="1-add-servicenow-tools">1. Add ServiceNow tools<a class="headerlink" href="#1-add-servicenow-tools" title="Permanent link">&para;</a></h3>
 <p>Open your agent in <strong>Agent Builder</strong> and go to the <strong>Tools</strong> tab.</p>
-</li>
-<li>
 <p>Add the <strong>Search Incidents by Incident Number</strong> tool from the ServiceNow catalog.</p>
-<p><img alt="ServiceNow tool catalog with Search Incidents tool selected" class="screenshot" src="../tools-and-escalations.images/1-search-incidents-tool.png" /></p>
-</li>
-<li>
+<p><img alt="ServiceNow tool catalog with Search Incidents tool selected" class="screenshot" src="../tools-and-escalations.images/1-search-incidents-tool-W.png" width="900" /></p>
 <p>Select the shared ServiceNow connection from the <strong>ServiceNow Incidents</strong> folder.</p>
-<p><img alt="Shared ServiceNow connection selected" class="screenshot" src="../tools-and-escalations.images/2-servicenow-connection.png" /></p>
-</li>
-<li>
+<div class="img-cols img-cols-50">
+<div>
+<p>Select the shared ServiceNow connection.
+  </p>
+</div>
+<div>
+<p><img alt="Shared ServiceNow connection selected" class="screenshot" src="../tools-and-escalations.images/2-servicenow-connection.png" />
+  </p>
+</div>
+</div>
 <p>Add the <strong>UpdateServiceNowIncident</strong> tool. Configure its argument descriptions exactly as follows:</p>
 <table>
 <thead>
@@ -944,9 +945,16 @@
 <p class="admonition-title">Tip</p>
 <p>A ServiceNow incident has two identifiers: <strong>ID</strong> (a unique string like <code>36155...53afb2</code>) and <strong>Number</strong> (a human-readable label like <code>INC0111888</code>). The update tool requires the ID, not the Number.</p>
 </div>
-<p><img alt="UpdateServiceNowIncident tool configured with argument descriptions" class="screenshot" src="../tools-and-escalations.images/3-update-tool-configured.png" /></p>
-</li>
-<li>
+<div class="img-cols img-cols-50">
+<div>
+<p>Configure the UpdateServiceNowIncident tool arguments.
+  </p>
+</div>
+<div>
+<p><img alt="UpdateServiceNowIncident tool configured with argument descriptions" class="screenshot" src="../tools-and-escalations.images/3-update-tool-configured.png" />
+  </p>
+</div>
+</div>
 <p>Update the agent's input arguments. Remove all existing input arguments and add a single one:</p>
 <table>
 <thead>
@@ -964,8 +972,6 @@
 </tr>
 </tbody>
 </table>
-</li>
-<li>
 <p>Update the <strong>User Prompt</strong> to include the incident number:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Analyze and categorize the following ServiceNow incident:
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -977,18 +983,14 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>Determine the appropriate category, subcategory, and assignee email for this incident based on the provided information.
 </code></pre></div>
-</li>
-<li>
 <p>Test the agent using the <strong>Ticket Management App</strong>. In the app:</p>
-<p><img alt="Generating incidents in Ticket Management App" class="screenshot" src="../tools-and-escalations.images/4-generate-incidents.png" /></p>
+<p><img alt="Generating incidents in Ticket Management App" class="screenshot" src="../tools-and-escalations.images/4-generate-incidents-W.png" width="900" /></p>
 <ul>
 <li>Enter your name in the tag field (e.g., "Sergey")</li>
 <li>Enter a quantity (e.g., "3")</li>
 <li>Click <strong>Generate</strong> to create sample incidents</li>
 <li>Copy the <strong>Incident Number</strong> from the <strong>New tickets</strong> list</li>
 </ul>
-</li>
-<li>
 <p>Update the <strong>System Prompt</strong> to instruct the agent how to use the tools:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>You are a ServiceNow Incidents categorization agent, an AI assistant tasked with managing newly created ServiceNow incidents. Your primary responsibility is to analyze incident details and determine the correct Category, Subcategory, and Assignee email address for each incident.
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -1012,31 +1014,30 @@
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a># Summarize the actions taken.
 </code></pre></div>
-<p><img alt="Agent test output showing all tools in use" class="screenshot" src="../tools-and-escalations.images/5-agent-test-output.png" /></p>
+<p><img alt="Agent test output showing all tools in use" class="screenshot" src="../tools-and-escalations.images/5-agent-test-output-W.png" width="900" /></p>
 <p>Test the agent with an incident number from the Ticket Management App. In the Execution Trace, verify that the agent calls the Search Incidents tool, retrieves categorization context, calls the Assignee Lookup tool, and finally updates the ServiceNow incident.</p>
-</li>
-</ol>
-<h3 id="part-2-add-escalations">Part 2: Add escalations<a class="headerlink" href="#part-2-add-escalations" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
+<h3 id="2-add-escalations">2. Add escalations<a class="headerlink" href="#2-add-escalations" title="Permanent link">&para;</a></h3>
 <p>Add an escalation path using the <strong>ServiceNow Agent Escalation App</strong> from the <strong>ServiceNow Incidents</strong> folder.</p>
-<p><img alt="Escalation app selected from ServiceNow Incidents folder" class="screenshot" src="../tools-and-escalations.images/6-escalation-app.png" /></p>
-</li>
-<li>
+<p><img alt="Escalation app selected from ServiceNow Incidents folder" class="screenshot" src="../tools-and-escalations.images/6-escalation-app-W.png" width="900" /></p>
 <p>Configure the escalation tool with this prompt:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Use this when you cannot establish category and subcategory of the Incident based on Description and Short Description.
 </code></pre></div>
-</li>
-<li>
 <p>Add the <code>in_Reasoning</code> argument with this description:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Brief explanation of the steps taken before escalating
 </code></pre></div>
 <p>Configure the escalation outcomes:
 - <strong>Submit</strong> → Continue execution
 - <strong>Stop</strong> → End execution</p>
-<p><img alt="Escalation tool configuration with prompt and arguments" class="screenshot" src="../tools-and-escalations.images/7-escalation-config.png" /></p>
-</li>
-<li>
+<div class="img-cols img-cols-50">
+<div>
+<p>Configure the escalation tool with prompt and argument settings.
+  </p>
+</div>
+<div>
+<p><img alt="Escalation tool configuration with prompt and arguments" class="screenshot" src="../tools-and-escalations.images/7-escalation-config.png" />
+  </p>
+</div>
+</div>
 <p>Update the <strong>System Prompt</strong> to include both tool usage and escalation handling. Replace the previous system prompt with this complete version:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>You are a ServiceNow Incidents categorization agent, an AI assistant tasked with managing newly created ServiceNow incidents. Your primary responsibility is to analyze incident details and determine the correct Category, Subcategory, and Assignee email address for each incident.
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -1063,19 +1064,16 @@
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
 <a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a># Summarize the actions taken.
 </code></pre></div>
-<p><img alt="Escalation triggered for ambiguous incident" class="screenshot" src="../tools-and-escalations.images/8-escalation-triggered.png" /></p>
-</li>
-<li>
+<p><img alt="Escalation triggered for ambiguous incident" class="screenshot" src="../tools-and-escalations.images/8-escalation-triggered-W.png" width="900" /></p>
 <p>Test the escalation path with this sample incident:</p>
 <ul>
 <li><strong>Short Description:</strong> <code>I would like to talk with a manager</code></li>
 <li><strong>Description:</strong> <code>Every time I reach out to this team, the response time is really long, seriously affecting my productivity. I would like to talk with a manager please.</code></li>
 </ul>
 <p>Run the agent with this incident number. The agent should recognize it cannot confidently categorize this incident and trigger the escalation, creating a task in <strong>Action Center</strong> for a human reviewer.</p>
-<p><img alt="Action Center task created for the escalated incident" class="screenshot" src="../tools-and-escalations.images/9-action-center-escalation.png" /></p>
-<p>In <strong>Action Center</strong>, the human reviewer will see the incident details and category/subcategory options. After they select a category and submit, the agent will complete the assignment using the Assignee Lookup automation and update the ticket in ServiceNow.</p>
-</li>
-</ol>
+<p><img alt="Action Center task created for the escalated incident" class="screenshot" src="../tools-and-escalations.images/9-action-center-escalation-W.png" width="900" /></p>
+<div class="highlight"><pre><span></span><code>In **Action Center**, the human reviewer will see the incident details and category/subcategory options. After they select a category and submit, the agent will complete the assignment using the Assignee Lookup automation and update the ticket in ServiceNow.
+</code></pre></div>
 <p>Your agent is now complete. It retrieves incident details from ServiceNow, categorizes them using grounded context, updates the ticket, and escalates when it cannot determine a clear category.</p>
 
 
