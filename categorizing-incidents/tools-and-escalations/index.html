@@ -12,7 +12,7 @@
         <meta name="author" content="Sergey Shumilov">
       
       
-        <link rel="canonical" href="https://s-shumilov.github.io/AgenticPracticeCourse/categorizing-incidents/tools-and-escalations/">
+        <link rel="canonical" href="https://uipath-practice.github.io/AgenticPracticeCourse/categorizing-incidents/tools-and-escalations/">
       
       
         <link rel="prev" href="../llm-with-context/">
@@ -968,22 +968,52 @@
 <li>
 <p>Update the <strong>User Prompt</strong> to include the incident number:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Analyze and categorize the following ServiceNow incident:
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Incident Short Description: {{IncidentShortDescription}}
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Incident Description: {{IncidentDescription}}
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Incident Number: {{IncidentNumber}}
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Determine the appropriate category, subcategory, and assignee email for this incident based on the provided information.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Incident Short Description: {{IncidentShortDescription}}
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Incident Description: {{IncidentDescription}}
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Incident Number: {{IncidentNumber}}
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>Determine the appropriate category, subcategory, and assignee email for this incident based on the provided information.
 </code></pre></div>
-<p><img alt="Updated User Prompt with IncidentNumber variable" class="screenshot" src="../tools-and-escalations.images/4-user-prompt-updated.png" /></p>
+</li>
+<li>
+<p>Test the agent using the <strong>Ticket Management App</strong>. In the app:</p>
+<p><img alt="Generating incidents in Ticket Management App" class="screenshot" src="../tools-and-escalations.images/4-generate-incidents.png" /></p>
+<ul>
+<li>Enter your name in the tag field (e.g., "Sergey")</li>
+<li>Enter a quantity (e.g., "3")</li>
+<li>Click <strong>Generate</strong> to create sample incidents</li>
+<li>Copy the <strong>Incident Number</strong> from the <strong>New tickets</strong> list</li>
+</ul>
 </li>
 <li>
 <p>Update the <strong>System Prompt</strong> to instruct the agent how to use the tools:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Determine the Incident Category and Subcategory based on Description and Short Description from Categorization Information Context. Context contains table with only possible Category-Subcategory pairs. Do not mix Category-Subcategory pairs if specific pair is not present in the context. Pick the Category-Subcategory pair that aligns well with Incident Descriptions. If you are not sure or no category pair is a clear match, use escalation.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>You are a ServiceNow Incidents categorization agent, an AI assistant tasked with managing newly created ServiceNow incidents. Your primary responsibility is to analyze incident details and determine the correct Category, Subcategory, and Assignee email address for each incident.
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a># Retrieve Incident details
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- Use Search Incidents tool.
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- Use IncidentNumber as Input.
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- If ticket already has an Assignee, then stop processing.
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a># Categorize the incident
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>- Determine the Incident Category and Subcategory based on Description and Short Description from Categorization Information Context.
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>- Context contains table with only possible Category-Subcategory pairs. Do not mix Category-Subcategory pairs if specific pair is not present in the context. Do not generate new categories if they are not present in the context.
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>- Pick the Category-Subcategory pair that aligns well with Incident Descriptions. If you are not sure or no category pair is a clear match, use escalation.
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a># Once categories have been established, determine the on-duty Assignee email address who handles this type of requests by calling Assignee Lookup automation.
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a># If Category, Subcategory and Assignee have been successfully established, update the ticket by running UpdateServiceNowIncident tool.
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a># If Category, Subcategory or Assignee can not be established, do nothing.
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a># Summarize the actions taken.
 </code></pre></div>
-<p>Use the Search Incidents tool with <code>IncidentNumber</code> as input to retrieve incident details. Stop if an assignee already exists. After categorizing, determine the on-duty assignee using the Assignee Lookup automation. Update the ticket using the UpdateServiceNowIncident tool. Take no action if category, subcategory, or assignee cannot be established.</p>
-<p><img alt="Updated System Prompt with tool instructions" class="screenshot" src="../tools-and-escalations.images/5-system-prompt-updated.png" /></p>
-</li>
-<li>
-<p>Test the updated agent using the <strong>Ticket Management App</strong> with a sample incident number. Categorized incidents move to the bottom list after processing.</p>
+<p><img alt="Agent test output showing all tools in use" class="screenshot" src="../tools-and-escalations.images/5-agent-test-output.png" /></p>
+<p>Test the agent with an incident number from the Ticket Management App. In the Execution Trace, verify that the agent calls the Search Incidents tool, retrieves categorization context, calls the Assignee Lookup tool, and finally updates the ServiceNow incident.</p>
 </li>
 </ol>
 <h3 id="part-2-add-escalations">Part 2: Add escalations<a class="headerlink" href="#part-2-add-escalations" title="Permanent link">&para;</a></h3>
@@ -1007,10 +1037,33 @@
 <p><img alt="Escalation tool configuration with prompt and arguments" class="screenshot" src="../tools-and-escalations.images/7-escalation-config.png" /></p>
 </li>
 <li>
-<p>Update the <strong>System Prompt</strong> to add the escalation handling instructions:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>If Category and Subcategory have been selected by the user as part of escalation, look up Assignee based on selected Category and Subcategory, and then update ticket. Only use email addresses retrieved from the lookup tool, do not generate email addresses.
+<p>Update the <strong>System Prompt</strong> to include both tool usage and escalation handling. Replace the previous system prompt with this complete version:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>You are a ServiceNow Incidents categorization agent, an AI assistant tasked with managing newly created ServiceNow incidents. Your primary responsibility is to analyze incident details and determine the correct Category, Subcategory, and Assignee email address for each incident.
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a># Retrieve Incident details
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- Use Search Incidents tool.
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- Use IncidentNumber as Input.
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>- If ticket already has an Assignee, then stop processing.
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a># Categorize the incident
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>- Determine the Incident Category and Subcategory based on Description and Short Description from Categorization Information Context.
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>- Context contains table with only possible Category-Subcategory pairs. Do not mix Category-Subcategory pairs if specific pair is not present in the context. Do not generate new categories if they are not present in the context.
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>- Pick the Category-Subcategory pair that aligns well with Incident Descriptions.
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>- If you are not sure or no category pair is a clear match, use escalation.
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a># Once categories have been established, determine the on-duty Assignee email address who handles this type of requests by calling Assignee Lookup automation.
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a># If Category, Subcategory and Assignee have been successfully established, update the ticket by running UpdateServiceNowIncident tool.
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a># If Category, Subcategory or Assignee can not be established, use the Escalation.
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a># If Category and Subcategory have been selected by the user as part of escalation, look up Assignee based on selected Category and Subcategory, and then update ticket. Only use email addresses retrieved from the lookup tool, do not generate email addresses.
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a># Summarize the actions taken.
 </code></pre></div>
-<p><img alt="System Prompt updated with escalation instructions" class="screenshot" src="../tools-and-escalations.images/8-system-prompt-escalation.png" /></p>
+<p><img alt="Escalation triggered for ambiguous incident" class="screenshot" src="../tools-and-escalations.images/8-escalation-triggered.png" /></p>
 </li>
 <li>
 <p>Test the escalation path with this sample incident:</p>
@@ -1018,8 +1071,9 @@
 <li><strong>Short Description:</strong> <code>I would like to talk with a manager</code></li>
 <li><strong>Description:</strong> <code>Every time I reach out to this team, the response time is really long, seriously affecting my productivity. I would like to talk with a manager please.</code></li>
 </ul>
-<p>The agent should recognize it cannot categorize this incident and trigger the escalation, creating a task in <strong>Action Center</strong> for a human reviewer.</p>
+<p>Run the agent with this incident number. The agent should recognize it cannot confidently categorize this incident and trigger the escalation, creating a task in <strong>Action Center</strong> for a human reviewer.</p>
 <p><img alt="Action Center task created for the escalated incident" class="screenshot" src="../tools-and-escalations.images/9-action-center-escalation.png" /></p>
+<p>In <strong>Action Center</strong>, the human reviewer will see the incident details and category/subcategory options. After they select a category and submit, the agent will complete the assignment using the Assignee Lookup automation and update the ticket in ServiceNow.</p>
 </li>
 </ol>
 <p>Your agent is now complete. It retrieves incident details from ServiceNow, categorizes them using grounded context, updates the ticket, and escalates when it cannot determine a clear category.</p>
