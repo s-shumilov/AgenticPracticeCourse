@@ -969,19 +969,38 @@
 <div class="img-cols img-cols-30">
 <div>
 <p>Select the task on the <strong>Approve</strong> path and set the action type to <strong>Execute Connector Activity</strong>.</p>
-<p>Configure the task to use the <strong>Data Fabric</strong> connector with the shared connection and <strong>Create Entity Record</strong> activity for the <strong>Payments Queue</strong> object.</p>
-<p>Map the invoice data output to the <strong>InvoiceData</strong> input field. This passes all approved invoice information to the payments queue.
+<p>Configure the task to use the <strong>Data Fabric</strong> connector with the shared connection and <strong>Create Entity Record</strong> activity for the <strong>Payments Queue</strong> object.
   </p>
 </div>
 <div>
-<p><img alt="Update Financial Systems task configuration" class="screenshot" src="../5-configure-api.images/4-update-records.png" />
+<p><img alt="Update Financial Systems task configuration" class="screenshot" src="../5-configure-api.images/4-update-financial-system.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-50">
+<div>
+<p>Click <strong>Manage Properties</strong> to add the invoice data field to the Payments Queue entity. Check the <strong>InvoiceData</strong> field to map your invoice data.
+  </p>
+</div>
+<div>
+<p><img alt="Select InvoiceData field" class="screenshot" src="../5-configure-api.images/4-update-records-fields.png" />
+  </p>
+</div>
+</div>
+<div class="img-cols img-cols-50">
+<div>
+<p>Map the invoice JSON data from Agent's output to the <strong>InvoiceData</strong> input field. This passes information about every approved invoice to the payments queue for downstream processing.
+  </p>
+</div>
+<div>
+<p><img alt="Map invoice data to InvoiceData input" class="screenshot" src="../5-configure-api.images/4-update-records-input.png" />
   </p>
 </div>
 </div>
 <h3 id="3-test-both-paths">3. Test both paths<a class="headerlink" href="#3-test-both-paths" title="Permanent link">&para;</a></h3>
 <p>Click <strong>Debug</strong> and let the process run. Remember that with <code>in_FailureProbability</code> parameter of RPA automation you can control how often you'll see rejected and approved invoices.</p>
 <p>Check <strong>Data Fabric</strong> to see approved invoices accumulating in the Payments Queue:</p>
-<p><img alt="Approved invoices in Data Fabric Payments Queue" class="screenshot" src="../5-configure-api.images/5-payments-queue-W.png" width="800" /></p>
+<p><img alt="Approved invoices in Data Fabric Payments Queue" class="screenshot" src="../5-configure-api.images/5-payments-queue-W.png" width="900" /></p>
 <p>Check your inbox for rejection emails from the shared Gmail account. Each email contains the discrepancies identified by the Agent and reviewed by the human validator:</p>
 <p><img alt="Rejection email received with generated invoice comparison" class="screenshot" src="../5-configure-api.images/6-actual-email-received-W.png" width="600" /></p>
 
