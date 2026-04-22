@@ -59,10 +59,13 @@ This is the primary content generation workflow. You'll do this for each lesson 
 
 - Exercise already scaffolded (Workflow 1 complete)
 - Screenshots uploaded to the lesson's image folder: `docs/<exercise-slug>/<step-slug>.images/`
+- Screenshots named in one of these formats:
+  - **Sequential numeric:** `1.png`, `2.png`, `3.png`, etc., OR
+  - **Mac screenshot format:** `Screenshot 2026-04-07 at 3.38.16 PM.png` (will be sorted by timestamp)
 - `scripts/.env` configured with Azure OpenAI credentials
 - Python dependencies installed: `pip install openai requests beautifulsoup4 numpy python-dotenv pillow`
 
-### Steps
+### For new lessons (no .md file yet)
 
 1. **Add documentation links** — Edit `docs/<exercise-slug>/documentation.txt` and add URLs to official UiPath docs relevant to this lesson's topic. The extraction script uses these as context.
 
@@ -78,7 +81,8 @@ This is the primary content generation workflow. You'll do this for each lesson 
 
 3. **What happens behind the scenes:**
    - Script fetches and embeds any new documentation URLs
-   - Script analyzes each screenshot and writes `.metadata.json` files
+   - Script analyzes each screenshot (in order) and writes `.metadata.json` files (one per image)
+   - Script renames screenshots based on metadata content with sequential numbering: `1-configure-robot.png`, `2-add-trigger.png`, `3-verify-settings.png`, etc.
    - Claude reads the metadata and builds the complete lesson page
    - Screenshots are placed in context with step-by-step instructions
 
@@ -93,8 +97,37 @@ This is the primary content generation workflow. You'll do this for each lesson 
    - Tips and warnings from your domain expertise
    - Cross-references to other lessons or exercises
 
-At the end, the skill shows the direct URL for the lesson:
-- `http://127.0.0.1:8000/AgenticPracticeCourse/<exercise-slug>/N-verb-noun/`
+### For adding steps to an existing lesson
+
+If a lesson `.md` file already exists (stub or partial), the skill will:
+
+1. **Extract metadata first** — Analyze all new screenshots in the folder without renaming them
+2. **Rename based on content** — Use the extracted metadata (step_instruction and ui_description) to give each screenshot a meaningful name that describes what it shows (e.g., `select-agent-type.png`, `review-system-prompt.png` — not `1-step.png`)
+3. **Generate descriptions** — Extract step instructions and UI descriptions from metadata
+4. **Rename images** — Give each screenshot a sequential numeric prefix + descriptive name based on content
+5. **Append to Steps section** — Add the new steps to the existing lesson's `## Steps` section while preserving the Goal and opening tip
+
+To add steps to an existing lesson:
+
+```
+/new-lesson
+Exercise: conversational-agents
+Step: 1
+Name: Creating a Conversational Agent
+Images: docs/conversational-agents/1-create-agent.images/
+```
+
+The skill will:
+- Detect the existing `1-create-agent.md` file
+- Extract metadata from all images in the folder (whether named `1.png`, `2.png`... or `Screenshot 2026-04-07 at 3.38.16 PM.png`...)
+- Rename them with sequential numbers + content-based slugs: `1-create-agent.png`, `2-select-type.png`, etc.
+- Add the extracted steps to the lesson's `## Steps` section
+
+---
+
+**Direct URLs for local preview (after generation):**
+- New lesson: `http://127.0.0.1:8000/AgenticPracticeCourse/<exercise-slug>/N-verb-noun/`
+- Updated lesson: same URL — the page has been updated in place
 
 The lesson is part of a draft exercise — it's not visible in the nav until you run `/publish-exercise`.
 

@@ -156,11 +156,24 @@ This pattern keeps images organized per-lesson and is required by the metadata e
 
 ### Image files
 
-- Lowercase, hyphenated, numbered: `1-new-agentic-process.png`, `2-import-bpmn.png`
-- The number indicates order within the lesson
-- Wide screenshots (full-screen, detailed layouts) append `-W`: `5-agent-test-output-W.png`
+**Final naming convention:** Descriptive name based on image content, derived from metadata extraction.
+
+- Lowercase, hyphenated: `create-agent.png`, `select-conversational-type.png`, `review-system-prompt.png`
+- Names describe the action or UI state shown in the screenshot
+- Named by the `/new-lesson` skill during metadata extraction — **do not rename manually after processing**
+- Wide screenshots (full-screen, detailed layouts) append `-W`: `agent-system-prompt-W.png`
 - The `-W` suffix signals that the image should render at full width (see [Formatting.md](Formatting.md))
 - Formats: PNG for screenshots (preferred), JPG for photos, SVG for diagrams, GIF for animations
+
+**Upload and processing workflow:**
+1. Take screenshots and save them in the lesson's `.images/` folder. Names can be:
+   - **Sequential numeric:** `1.png`, `2.png`, `3.png`, etc.
+   - **Mac screenshot format:** `Screenshot 2026-04-07 at 3.38.16 PM.png` (automatically sorted by timestamp)
+2. Run `/new-lesson` — the skill extracts metadata from each screenshot, preserving order
+3. The skill renames each image based on its `step_instruction` and `ui_description` fields: `1-create-agent.png`, `2-select-conversational-type.png`, etc.
+4. Claude references the renamed images in the lesson markdown
+
+The numeric prefix in the final name is derived from the image order, and the descriptive slug comes from the image content — it ensures metadata extraction processes images in the correct order, then each image is renamed with a meaningful name once its content is understood.
 
 ### Metadata files
 

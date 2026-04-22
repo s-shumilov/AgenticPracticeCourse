@@ -46,6 +46,35 @@ Build a mental model of the full lesson: what the learner does first, what inter
 
 Also read the existing lesson `.md` file if it exists (it may be a stub). Note any headings or partial content that should be preserved.
 
+Keep the metadata handy for the next step — you'll use `step_instruction` and `ui_description` to generate the descriptive image names.
+
+---
+
+## Step 2.5: Rename images and metadata files
+
+Once metadata is extracted, rename the image and metadata files to meaningful names based on their content.
+
+**Naming convention:** `N-descriptive-slug.png` and `N-descriptive-slug.metadata.json`
+
+- `N` is the sequential order (1, 2, 3, ...)
+- `descriptive-slug` is derived from the image's `step_instruction` or `ui_description` in the metadata
+- Wide images append `-W` suffix: `N-descriptive-slug-W.png`
+
+**How to generate names:**
+1. Read each `.metadata.json` file in order (ascending by original filename)
+2. Extract a short slug from the `step_instruction` or `ui_description` (2–4 words, hyphenated, lowercase)
+3. Combine: `1-slug.png`, `2-slug.png`, etc.
+4. If the image is wide (full-width, detailed UI), append `-W`: `3-slug-W.png`
+5. Rename both the `.png` and `.metadata.json` files with matching names
+
+**Example:**
+- Original: `Screenshot 2026-04-07 at 3.38.16 PM.png` → `1-create-agent.png`
+- Metadata: `Screenshot 2026-04-07 at 3.38.metadata.json` → `1-create-agent.metadata.json`
+- Original: `Screenshot 2026-04-07 at 3.40.55 PM.png` → `2-select-conversational-type.png`
+- Metadata: `Screenshot 2026-04-07 at 3.40.metadata.json` → `2-select-conversational-type.metadata.json`
+
+After renaming, verify that each image has a matching metadata file (e.g., `1-create-agent.png` pairs with `1-create-agent.metadata.json`).
+
 ---
 
 ## Step 3: Build the lesson page
@@ -60,9 +89,9 @@ Follow the **Lesson Page** template in `Master/CourseStructure.md`:
 4. **Concept sections** — background needed before hands-on steps
 5. **Steps section** — numbered substeps with screenshots
 
-Apply all formatting rules from `Master/Formatting.md`:
+Reference the renamed images from Step 2.5. Apply all formatting rules from `Master/Formatting.md`:
 - Screenshots use `{ .screenshot }` class
-- Wide images (`-W` suffix) use `width="900"`
+- Wide images (`-W` suffix in filename) use `width="900"`
 - Regular images use two-column layout or 4-space indent inside numbered lists
 - Code blocks have language identifiers
 - Arguments use the `css hl_lines="1"` pattern

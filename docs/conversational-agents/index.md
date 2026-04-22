@@ -9,7 +9,7 @@
 | Step | Focus |
 | ---: | :--- |
 | [**Create a Conversational Agent**](1-create-agent.md) | Build an agent grounded in UiPath Security documentation using context grounding |
-| [**Add Tools**](2-add-tools.md) | Connect Orchestrator tools so the agent can retrieve live Job Details |
+| [**Understanding Available Tools**](2-review-tools.md) | Explore the tools your agent can use and how they process data |
 | [**Connect an MCP Server**](3-connect-mcp-server.md) | Add an external MCP server to give the agent access to weather data |
 | [**Test with Evaluations**](4-test-with-evaluations.md) | Design and run an evaluations dataset to validate agent responses |
 
