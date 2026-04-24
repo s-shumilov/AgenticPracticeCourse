@@ -13,7 +13,7 @@ You'll create a working conversational agent that answers questions about invoic
 
 ## Why Autopilot Matters
 
-Configuring an agent from scratch can feel overwhelming - you need to choose the right tools, write clear instructions, and ensure everything works together. **Autopilot** handles the heavy lifting: it reads your natural-language description of the task, scans your **Orchestrator** for available relevant tools and context sources, and generates a system prompt that brings it all together. You review the result and adjust - manually or using autopilot chat again.
+Configuring an agent from scratch can feel overwhelming. You need to choose the right tools, write clear instructions, and ensure everything works together. **Autopilot** handles the heavy lifting: it reads your natural-language description, scans **Orchestrator** for available tools and context sources, and generates a system prompt that brings it all together. Review the result and adjust — manually or via the Autopilot chat.
 
 ## Steps
 
@@ -21,7 +21,7 @@ Configuring an agent from scratch can feel overwhelming - you need to choose the
 
 
 [[[
-It's starts with usual step - in **Studio Web** homes, click the blue **Create New** button in the top-right corner. From the dropdown menu, select **Agent** to create a new solution.
+In **Studio Web**, click the blue **Create New** button in the top-right corner. From the dropdown, select **Agent** to create a new solution.
 |30|
 ![Studio Web Create New menu with Agent option highlighted](1-create-agent.images/1-create-new-menu.png){ .screenshot }
 ]]]
@@ -58,13 +58,13 @@ While **Autopilot** runs, it:
 - Identifies context sources (like **Context Grounding indexes**)
 - Analyzes your description to decide what's relevant
 
-![Autopilot analysis in progress, showing successful discovery of tools and context](1-create-agent.images/3-autopilot-analyzing.png){ .screenshot width=900}
+![Autopilot analysis in progress, showing successful discovery of tools and context](1-create-agent.images/3-autopilot-analyzing.png){ .screenshot width="800" }
 
-**Autopilot** displays a list of tools it found in your **Orchestrator**. Review the list carefully. Each tool represents an RPA process, API, or other automation your agent can invoke. 
+**Autopilot** displays a list of tools it found in your **Orchestrator**. Review the list carefully. Each tool represents an RPA process, API, or other automation your agent can invoke.
 
-![List of available tools discovered by Autopilot, with Accept button highlighted](1-create-agent.images/4-available-tools.png){ .screenshot width=900}
+![List of available tools discovered by Autopilot, with Accept button highlighted](1-create-agent.images/4-available-tools.png){ .screenshot width="800" }
 
-Click **Accept** to confirm these tools will be available to your agent. Noticed that you only can see tools that you have permissions to see based on Orchestrator's role based access controls (RBAC)? Keep in mind that when you publish and run this automation, the robot user should have permission to run these jobs, otherwise tool calls will fail.
+Click **Accept** to confirm these tools will be available to your agent. Notice that you can only see tools you have permission to use, based on Orchestrator's role-based access controls (RBAC). When you publish and run this automation, the robot user needs those same permissions — otherwise tool calls will fail.
 
 ### 4. Review the generated system prompt
 
@@ -78,7 +78,7 @@ Click **Accept** to confirm these tools will be available to your agent. Noticed
     The system prompt is the agent's functional guide and job description. A well-written prompt is the difference between helpful and hallucinating.
 
 
-![System prompt editor on the left, Autopilot Preview on the right showing the generated prompt](1-create-agent.images/5-review-system-prompt-W.png){ .screenshot }
+![System prompt editor on the left, Autopilot Preview on the right showing the generated prompt](1-create-agent.images/5-review-system-prompt-W.png){ .screenshot width="900" }
 
 [[[
 If the prompt looks good, click **Accept** to confirm. 
@@ -88,19 +88,18 @@ You will be able to edit it later.
 ![Final confirmation dialog with agent behavior guidelines](1-create-agent.images/6-confirm-behavior.png){ .screenshot }
 ]]]
 
-### 5. Add a Context Grounding indexes
+### 5. Add Context Grounding indexes
 
 Just to make it complete, let's add data from some existing indexes. With context, conversational agents will be able to cite sources, which is very useful for a chatbot automation reading long complex documents.
 
 On the **agent canvas** click the **+** icon under **Context** on the Agent node to add a knowledge source.
 
-![Agent canvas showing Context connection point with the add button highlighted](1-create-agent.images/7-add-context.png){ .screenshot width=800 }
+![Agent canvas showing Context connection point with the add button highlighted](1-create-agent.images/7-add-context.png){ .screenshot width="800" }
 
 A right-side panel opens showing available context sources. Search for "security" to find the **UiPath Security data** index containing very comprehensive documentation about UiPath platform. Few topics you could inquire about will include: **data encryption, role based access controls, agentic security, data residency**.
 
-- If you want to keep this file, here is the download link:
-**[docs/assets/UiPath Security Whitepaper.pdf](/AgenticPracticeCourse/assets/UiPath Security Whitepaper.pdf)**. 
-- You can find more interesting whitepapers and learn about UiPath platform security here: **[here](https://trust.uipath.com/)** and **[here](https://www.uipath.com/legal/trust-and-security/security)**.
+- Download the source file if you want to keep it: [UiPath Security Whitepaper.pdf](../assets/UiPath Security Whitepaper.pdf)
+- Explore more interesting whitepapers and learn about UiPath platform security in [UiPath Trust Portal](https://trust.uipath.com/) and [UiPath Security page](https://www.uipath.com/legal/trust-and-security/security)
 
 ### 6. Configure how the agent retrieves from the index
 
@@ -109,7 +108,7 @@ After selecting the index, a configuration form appears.
 
 These settings control how the agent searches and retrieves information. 
 
-In current case we will use simple semantic search and maybe increase relevance threshold to 0.3-0.5 so that it narrows down search results - it makes sense for large documents.
+Use simple semantic search. You can increase the relevance threshold to 0.3–0.5 to narrow down results — useful for large documents like this one.
 
 Your agent is now fully configured.
 |50|
@@ -133,4 +132,4 @@ Don't forget to give it a meaningful name, as usually:
 !!! tip "Tip of the day"
     It’s important to arrange all tools like tentacles, as shown. This allows the agent to multitask efficiently - and just like a real octopus, it can regrow any tentacle when a tool call fails. Even better, this **agentic octopus** can grow new tentacles over time, continuously expanding its reach. And yes, this is just an attention check which means you can pick any other animal to mimic it's natural benefits with the agent!
 
-Your agent is now ready to test. In the next lesson, you'll explore the tools it can use and understand how they work.
+Your agent is now ready to test. But let's not rush - in the next lesson, you'll explore the tools it can use and understand how they work.
