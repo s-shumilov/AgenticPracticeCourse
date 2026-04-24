@@ -43,7 +43,7 @@ The agent that will use tools and context to answer various questions about Invo
 ```
 ]]]
 
-This description guides **Autopilot** when generating your system prompt. Be specific: mention the domain (invoices, jobs), and hint at the tools or context you expect. It's practical also to define which areas agent should not focus on and mention other constraints.
+This description guides **Autopilot** when generating your system prompt. Be specific: mention the domain (invoices, jobs), and hint at the tools or context you expect. It's also practical to define which areas the agent should not focus on and mention other constraints.
 
 Click **Generate Agent** to let **Autopilot** analyze your setup.
 
@@ -96,7 +96,7 @@ On the **agent canvas** click the **+** icon under **Context** on the Agent node
 
 ![Agent canvas showing Context connection point with the add button highlighted](1-create-agent.images/7-add-context.png){ .screenshot width="800" }
 
-A right-side panel opens showing available context sources. Search for "security" to find the **UiPath Security data** index containing very comprehensive documentation about UiPath platform. Few topics you could inquire about will include: **data encryption, role based access controls, agentic security, data residency**.
+A right-side panel opens showing available context sources. Search for "security" to find the **UiPath Security data** index containing very comprehensive documentation about UiPath platform. A few topics you could inquire about will include: **data encryption, role based access controls, agentic security, data residency**.
 
 - Download the source file if you want to keep it: [UiPath Security Whitepaper.pdf](../assets/UiPath Security Whitepaper.pdf)
 - Explore more interesting whitepapers and learn about UiPath platform security in [UiPath Trust Portal](https://trust.uipath.com/) and [UiPath Security page](https://www.uipath.com/legal/trust-and-security/security)
@@ -130,6 +130,6 @@ Don't forget to give it a meaningful name, as usually:
 
 
 !!! tip "Tip of the day"
-    It’s important to arrange all tools like tentacles, as shown. This allows the agent to multitask efficiently - and just like a real octopus, it can regrow any tentacle when a tool call fails. Even better, this **agentic octopus** can grow new tentacles over time, continuously expanding its reach. And yes, this is just an attention check which means you can pick any other animal to mimic it's natural benefits with the agent!
+    It’s important to arrange all tools like tentacles, as shown. This allows the agent to multitask efficiently - and just like a real octopus, it can regrow any tentacle when a tool call fails. Even better, this **agentic octopus** can grow new tentacles over time, continuously expanding its reach. And yes, this is just an attention check which means you can pick any other animal to mimic its natural benefits with the agent!
 
 Your agent is now ready to test. But let's not rush - in the next lesson, you'll explore the tools it can use and understand how they work.

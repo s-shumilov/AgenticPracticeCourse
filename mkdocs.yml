@@ -61,6 +61,12 @@ nav:
     - 4. Configure Human Validation: invoice-matching-ixp/4-configure-human-validation.md
     - 5. Configure API Integration: invoice-matching-ixp/5-configure-api.md
     - You did it!: invoice-matching-ixp/you-did-it.md
+  - Conversational Agents:
+    - Overview: conversational-agents/index.md
+    - 1. Create a Conversational Agent: conversational-agents/1-create-agent.md
+    - 2. Understanding Available Tools: conversational-agents/2-review-tools.md
+    - 3. Giving It a Try: conversational-agents/3-testing-conversations.md
+    - You did it!: conversational-agents/you-did-it.md
   - Next Steps: next-steps.md
 
 extra_css:

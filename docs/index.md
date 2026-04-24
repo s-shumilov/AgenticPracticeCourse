@@ -12,15 +12,19 @@ This **Learner's Handbook** is your practical guide for the hands-on exercises. 
 
 ## What You'll Build
 
-This workshop guides you through building real agentic automation solutions on the UiPath Platform. You'll work through two main use cases, each progressively adding intelligence and orchestration complexity:
+This workshop guides you through building real agentic automation solutions on the UiPath Platform. You'll work through three main use cases, each progressively adding intelligence and orchestration complexity:
 
-1. **ServiceNow Incident Categorization Agent** — Build an intelligent ServiceNow incident triage agent that reads incident descriptions for ServiceNow tickets and assigns the right category, subcategory, and on-duty assignee. Your first encounter with agentic AI in the wild. 
+1. **ServiceNow Incident Categorization Agent** — Build an intelligent ServiceNow incident triage agent that reads incident descriptions for ServiceNow tickets and assigns the right category, subcategory, and on-duty assignee. Your first encounter with agentic AI in the wild.
 
-2. **Invoice vs. Purchase Order Matching** — a multi-actor automation that combines an AI agent with Robotic workflows, a human validation step, and API integrations. This is where agentic orchestration starts to look like real enterprise automation.
+2. **Invoice vs. Purchase Order Matching** — A multi-actor automation that combines an AI agent with Robotic workflows, a human validation step, and API integrations. This is where agentic orchestration starts to look like real enterprise automation.
+
+3. **Conversational Agents** — Build a conversational AI agent grounded in UiPath Security documentation, connect it to live Orchestrator tools, and test it through real conversations spanning data queries, write operations, and knowledge retrieval.
 
 [Start Exercise 1 →](categorizing-incidents/index.md)
 
 [Start Exercise 2 →](invoice-matching-ixp/index.md)
+
+[Start Exercise 3 →](conversational-agents/index.md)
 
 Or use navigation on the top to access lessons!
 

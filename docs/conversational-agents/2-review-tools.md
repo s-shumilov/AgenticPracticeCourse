@@ -5,6 +5,7 @@
     1. Find the **Orchestrator Tools** template in **Studio Web**
     2. Open workflows and understand their type and structure and how they process data internally
     3. Examine tool arguments (inputs and outputs)
+    4. Set up starting prompts in the agent's **Appearance** settings
 
 ## Goal
 
@@ -12,11 +13,11 @@ In this lesson you'll explore the tools available to your agent by examining the
 
 ## What Are Tools?
 
-Tools are reusable automations built in Studio Web and published to **Orchestrator** in **Orchestrator Tools** folder. When your agent needs to do something - query **Data Fabric** to retrieve invoice data, list ServiceNow incidents or add a note to an Incident - it finds a best matching tool based on it's description and runs it. Tools you will see here are simple, but these could be any existing components available in Orchestrator which you want to expose to a chatbot, including UI automations or Integration Service activities.
+Tools are reusable automations built in Studio Web and published to **Orchestrator** in **Orchestrator Tools** folder. When your agent needs to do something - query **Data Fabric** to retrieve invoice data, list **ServiceNow** incidents or add a note to an Incident - it finds the best matching tool based on its description and runs it. Tools you will see here are simple, but these could be any existing components available in Orchestrator which you want to expose to a chatbot, including UI automations or Integration Service activities.
 
-In any case, each tool has a **Workflow** (the automation logic inside), **Inputs** - data the tool needs to run execute workflow, **Outputs** - data the tool returns to the agent. 
+In any case, each tool has a **Workflow** (the automation logic inside), **Inputs** - data the tool needs to execute, **Outputs** - data the tool returns to the agent.
 
-Data for Input Arguments is generated based on **Argument Descriptions** and **Prompts** every time - this is the reason why we alwasy write the descriptions. The tool call creates an Orchestrator Job in the backend and waits for results when Job is completed. Agent then reviews the results and continues moving to it's goal, or achieving it and finishing it's own execution.
+Data for Input Arguments is generated based on **Argument Descriptions** and **Prompts** every time - this is the reason you always write the descriptions. The tool call creates an Orchestrator Job in the backend and waits for results when Job is completed. Agent then reviews the results and continues moving to its goal, or achieving it and finishing its own execution.
 
 By reviewing your tools before configuring your agent, you'll understand what your octopus agent can do.
 
@@ -29,7 +30,7 @@ In **Studio Web**, click the **Templates** tab to browse available starting temp
 Search for "orchestrator tool" to find the **Orchestrator Tools Template** - a pre-built solution containing common automation tools.
 
 [[[
-Open the three-dot menu on the template card and select **New solution from template**. You don't need to publish it as tools have already been deployed in Orchestrator. We will only review the source code.
+Open the three-dot menu on the template card and select **New solution from template**. You don't need to publish it as tools have already been deployed in Orchestrator. You'll only review the source code.
 |30|
 ![Studio Web Templates tab with Orchestrator Tools Template highlighted](2-review-tools.images/1-find-orchestrator-tools-template.png){ .screenshot }
 ]]]
@@ -46,12 +47,13 @@ You'll see a list of available tools. Select API workflow called **Get ServiceNo
 Select **Workflow.json** under the tool folder to see the automation steps inside.
 ]]]
 
-ServiceNow tools build their requests dynamically. **ServiceNow HTTP Request** has a JS expression which shows exactly how the API query URL is constructed from the tool's input arguments. API response is parsed and sent as output, which goes back to agent. 
+ServiceNow tools build their requests dynamically. **ServiceNow HTTP Request** has a JS expression which shows exactly how the API query URL is constructed from the tool's input arguments. API response is parsed and sent as output, which goes back to the agent. 
 
 ![ServiceNow incidents tool showing JS expression editor with dynamic request URL](2-review-tools.images/5-incidents-http-request-url-W.png){ .screenshot width="900" }
 
-API workflow like **Get Orchestrator Jobs** work the same way, but talks to Orchestrator instead of ServicnNow. It filters jobs by process name and time range. Notice the special date format and how we instruct agent in Argument's description: 
-```
+API workflow like **Get Orchestrator Jobs** work the same way, but talks to Orchestrator instead of ServiceNow. It filters jobs by process name and time range. Notice the special date format and how you instruct the agent in the Argument's description:
+
+```text
 Filter jobs after this date. Format: "2026-04-07T00%3A00%3A00.00Z". Default 30 days from today.
 ```
 
@@ -62,7 +64,7 @@ Filter jobs after this date. Format: "2026-04-07T00%3A00%3A00.00Z". Default 30 d
 
 Open **Get Approved Invoices** - RPA workflow that reads data from Data Fabric: 
 
-![Tool workflow showing Assign, Search, HTTP Request, and Response steps](2-review-tools.images/3-review-tool-implementation.png){ .screenshot width="800"}
+![Tool workflow showing Assign, Search, HTTP Request, and Response steps](2-review-tools.images/3-review-tool-implementation.png){ .screenshot width="800" }
 
 [[[
 Open the **Data Manager** panel to see the tool's configuration.
@@ -72,16 +74,14 @@ These arguments tell you exactly what to expect when your agent calls this tool.
 ![Data Manager panel showing tool inputs and outputs](2-review-tools.images/4-configure-tool-arguments.png){ .screenshot }
 ]]]
 
-### 5. One last thing
+### 4. Configure agent appearance
 
 Before running actual tests, it's a good practice to add a welcome message and recommend prompts that the agent is supposed to answer. Open your agent's configuration and fill in the **Appearance** section:
 
 [[[
-Set a **Welcome title** and **Welcome description**, then click **Edit starting prompts** to define the suggested questions that appear in the chat interface. 
+Set a **Welcome title** and **Welcome description**, then click **Edit starting prompts** to define the suggested questions that appear in the chat interface.
 
 Starting prompts appear as clickable chips in the chat interface. They're a quick way to kick off common test conversations — and to give end users a helpful starting point.
-
-Open your agent's configuration. In the **Appearance** section, click **Edit starting prompts**.
 |50|
 ![Agent appearance settings showing welcome title, description, and Edit starting prompts button](2-review-tools.images/7-agent-appearance-settings.png){ .screenshot }
 ]]]
